@@ -1,16 +1,23 @@
 body { margin:0; padding:0; }
-#map { position: absolute; top:0; bottom:0; right:0; left:0; }
+#map {
+  position: absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  height: 100%;
+  width: 1040px;
+}
 
 .sidenav { 
     margin: 0;
     padding: 0px;
-    position: fixed;
-    width: 400px;
+    position: absolute;
+    width: 25%;
     left: 0px;
     top: 0px;
     background-color: #f1f1f1;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .header {
@@ -18,20 +25,21 @@ body { margin:0; padding:0; }
   left: 0;
   top: 0;
   width: 400px;
-  height: 50px;
-  padding: 15px 0px 15px 10px;
+  height: 60px;
+  padding: 5px 10px 20px 10px;
   justify-items: left;
   background-color: #387181;
 }
 
 div.main {
     margin-left: 420px;
-    padding: 1px 16px;
+    padding: 2px;
     height: 100%;
 }
 
 li {
-    padding-top: 20px;
+    padding-top: 15px;
+    list-style-type: none;
 }
 
 .heading {
@@ -43,9 +51,8 @@ li {
 }
 
 .label {
+    padding-right: 10px;
     text-align: left;
-    padding: 25px;
-    margin-top: 15px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
