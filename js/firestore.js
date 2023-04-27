@@ -1,7 +1,7 @@
 // FIRESTORE DATABASE
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
 
 // Your Firestore code here
 
@@ -27,4 +27,31 @@ getDocs(colRef).then((querySnapshot) => {
 		console.log(doc.data().name);
 		console.log(doc.data()['admu-office']);
 	})
-})
+});
+
+
+function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates) {
+	let datesObj = {};
+	for (let i = 0; i < dates.length; i++) {
+	  datesObj[i] = dates[i];
+	}
+	addDoc(colRef, {
+	  name: name,
+	  activity: activity,
+	  "`admu-contact`": admuContact,
+	  "`admu-email`": admuEmail,
+	  "`admu-office`": admuOffice,
+	  org: org,
+	  "`partner-contact`": partnerContact,
+	  dates: datesObj
+	})
+	.then((docRef) => {
+	  console.log("Document written with ID: ", docRef.id);
+	})
+	.catch((error) => {
+	  console.error("Error adding document: ", error);
+	});
+}
+  
+addLocation("Test2", "Hello", "Angelo", "Test", "Test", "CompSAt", "Test", ["2002-3-2", "2002"])
+  
