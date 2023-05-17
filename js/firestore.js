@@ -1,7 +1,7 @@
 // FIRESTORE DATABASE
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
 
 // Your Firestore code here
 
@@ -52,6 +52,33 @@ function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, pa
 	  console.error("Error adding document: ", error);
 	});
 }
-  
-addLocation("Test2", "Hello", "Angelo", "Test", "Test", "CompSAt", "Test", ["2002-3-2", "2002"])
+
+
+function editLocation(docId, name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates) {
+	let datesObj = {};
+	for (let i = 0; i < dates.length; i++) {
+	  datesObj[i] = dates[i];
+	}
+	const docReference = doc(db, 'partners', docId);
+	const updateData = {
+	  name: name,
+	  activity: activity,
+	  "`admu-contact`": admuContact,
+	  "`admu-email`": admuEmail,
+	  "`admu-office`": admuOffice,
+	  org: org,
+	  "`partner-contact`": partnerContact,
+	  dates: datesObj
+	};
+	return updateDoc(docReference, updateData)
+	  .then(() => {
+		console.log("Document updated successfully");
+	  })
+	  .catch((error) => {
+		console.error("Error updating document: ", error);
+	  });
+}
+
+// addLocation("Test2", "Hello", "Angelo", "Test", "Test", "CompSAt", "Test", ["2002-3-2", "2002"])
+editLocation("2msbnDBsyZyjfUWM40mz", "Test2", "Hello", "This", "is", "a", "test", "For editing Location, second test", ["2002-3-2", "2002", "2003"])
   
