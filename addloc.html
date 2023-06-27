@@ -2,7 +2,54 @@
 <html>
     <head>
         <title>Add Location</title>
-        <link rel="stylesheet" href="form.css">
+        <link rel="stylesheet" href="./css/form.css">
+            
+        <script type="module">
+            import { addLocation } from "./js/firestore.js";
+
+            document.getElementById("submit_form").addEventListener("click", handleFormSubmit);
+
+            function handleFormSubmit() {
+                var partner = document.getElementById("partner").value;
+                var partnerContactPerson = document.getElementById("partner_contact-person").value;
+                var organization = document.getElementById("organization").value;
+                var natureOfActivity = document.getElementById("nature_of_act").value;
+                var datesOfPartnership = document.getElementById("dates_of_partnership").value;
+                var ateneoOffice = document.getElementById("ateneo_office").value;
+                var ateneoContactPerson = document.getElementById("ateneo_contact-person").value;
+                var ateneoContactEmail = document.getElementById("ateneo_contact-email").value;
+                
+                // Parse the date input as a whole string
+                var dateParts = datesOfPartnership.split("-");
+                var year = dateParts[0];
+                var month = dateParts[1];
+                var day = dateParts[2];
+                var parsedDatesOfPartnership = year + "-" + month + "-" + day;
+
+                addLocation(
+                    partner, 
+                    natureOfActivity,
+                    ateneoContactPerson,
+                    ateneoContactEmail,
+                    ateneoOffice,
+                    organization,
+                    partnerContactPerson,
+                    parsedDatesOfPartnership
+                );
+                
+                document.getElementById("partner").value = "";
+                document.getElementById("partner_contact-person").value = "";
+                document.getElementById("organization").value = "";
+                document.getElementById("nature_of_act").value = "";
+                document.getElementById("dates_of_partnership").value = "";
+                document.getElementById("ateneo_office").value = "";
+                document.getElementById("ateneo_contact-person").value = "";
+                document.getElementById("ateneo_contact-email").value = "";
+                
+                // Display a success message
+                alert("Form submitted successfully!");
+            }
+        </script>
     </head>
     
     <body>
@@ -81,5 +128,6 @@
 
             <br><br><br>
         </div>
+
     </body>  
 </html>

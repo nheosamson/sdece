@@ -30,11 +30,7 @@ getDocs(colRef).then((querySnapshot) => {
 });
 
 
-function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates) {
-	let datesObj = {};
-	for (let i = 0; i < dates.length; i++) {
-	  datesObj[i] = dates[i];
-	}
+export function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates) {
 	addDoc(colRef, {
 	  name: name,
 	  activity: activity,
@@ -43,7 +39,7 @@ function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, pa
 	  "`admu-office`": admuOffice,
 	  org: org,
 	  "`partner-contact`": partnerContact,
-	  dates: datesObj
+	  dates: dates
 	})
 	.then((docRef) => {
 	  console.log("Document written with ID: ", docRef.id);
@@ -54,11 +50,7 @@ function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, pa
 }
 
 
-function editLocation(docId, name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates) {
-	let datesObj = {};
-	for (let i = 0; i < dates.length; i++) {
-	  datesObj[i] = dates[i];
-	}
+export function editLocation(docId, name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates) {
 	const docReference = doc(db, 'partners', docId);
 	const updateData = {
 	  name: name,
@@ -68,7 +60,7 @@ function editLocation(docId, name, activity, admuContact, admuEmail, admuOffice,
 	  "`admu-office`": admuOffice,
 	  org: org,
 	  "`partner-contact`": partnerContact,
-	  dates: datesObj
+	  dates: dates
 	};
 	return updateDoc(docReference, updateData)
 	  .then(() => {
