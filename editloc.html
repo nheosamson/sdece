@@ -3,6 +3,36 @@
     <head>
         <title>Edit Location</title>
         <link rel="stylesheet" href="./css/form.css">
+
+        <script type="module">
+            import { editLocation, getDocIdByPartnerName } from "./js/firestore.js";
+
+            document.getElementById("submit_form").addEventListener("click", handleFormSubmit);
+
+            function handleFormSubmit() {
+                const partnerName = document.getElementById("partner").value;
+                getDocIdByPartnerName(partnerName)
+                .then((docId) => {
+                    if (docId) {
+                         // If a matching docId is found, proceed with updating the document
+                        const name = partnerName;
+                        const activity = document.getElementById("nature_of_act").value;
+                        const admuContact = document.getElementById("ateneo_contact-person").value;
+                        const admuEmail = document.getElementById("ateneo_contact-email").value;
+                        const admuOffice = document.getElementById("ateneo_office").value;
+                        const org = document.getElementById("organization").value;
+                        const partnerContact = document.getElementById("partner_contact-person").value;
+                        const dates = document.getElementById("dates_of_partnership").value;
+
+                        editLocation(docId, name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates);
+                    }
+                    else {
+                        // Handle case when no matching document is found
+                        alert("No matching document found for the partner name: " + partnerName);
+                    }
+                });
+            }
+        </script>
     </head>
     
     <body>

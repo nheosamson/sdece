@@ -1,7 +1,7 @@
 // FIRESTORE DATABASE
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
 
 // Your Firestore code here
 
@@ -65,12 +65,30 @@ export function editLocation(docId, name, activity, admuContact, admuEmail, admu
 	return updateDoc(docReference, updateData)
 	  .then(() => {
 		console.log("Document updated successfully");
+		alert("Document updated successfully");
 	  })
 	  .catch((error) => {
 		console.error("Error updating document: ", error);
 	  });
 }
 
+export function getDocIdByPartnerName(partnerName) {
+    return getDocs(query(colRef, where('name', '==', partnerName)))
+        .then((querySnapshot) => {
+            if (!querySnapshot.empty) {
+                // Assuming there is only one document with the given partner name
+                const doc = querySnapshot.docs[0];
+                return doc.id;
+            } else {
+                console.log("No matching document found.");
+                return null;
+            }
+        })
+        .catch((error) => {
+            console.error("Error getting documents: ", error);
+            return null;
+        });
+}
 // addLocation("Test2", "Hello", "Angelo", "Test", "Test", "CompSAt", "Test", ["2002-3-2", "2002"])
-editLocation("2msbnDBsyZyjfUWM40mz", "Test2", "Hello", "This", "is", "a", "test", "For editing Location, second test", ["2002-3-2", "2002", "2003"])
+
   
