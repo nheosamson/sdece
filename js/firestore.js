@@ -20,14 +20,44 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 const db = getFirestore();
 const colRef = collection(db, 'partners')
+let partnersArray = []
 
-// Get locations, not sure which location to get, either the office loc or the school loc
-getDocs(colRef).then((querySnapshot) => {
-	querySnapshot.forEach((doc) => {
-		console.log(doc.data().name);
-		console.log(doc.data()['admu-office']);
-	})
-});
+// get docs from firestore
+
+getDocs(colRef)
+  .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      partnersArray.push(doc.data());
+      console.log(partnersArray);
+    });
+
+    // populate ul with partners
+    partnersArray.forEach((partner) => {
+      console.log(partner.name);
+      const containerDiv = document.createElement('div');
+      const img = document.createElement('img');
+      const listItem = document.createElement('li');
+      const anchor = document.createElement('a');
+
+      // set attributes
+      img.src = 'Location Icon.png';
+      img.style.height = '22px';
+      img.style.alignItems = 'left';
+      anchor.href = '#';
+      anchor.textContent = partner.name;
+
+      // append to DOM
+      containerDiv.appendChild(img);
+      listItem.appendChild(anchor);
+      containerDiv.appendChild(listItem);
+      locationList.appendChild(containerDiv);
+    });
+  })
+  .catch((error) => {
+    console.error("Error getting documents: ", error);
+  });
+
+
 
 
 export function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates) {
