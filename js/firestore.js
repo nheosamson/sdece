@@ -119,6 +119,5 @@ export function getDocIdByPartnerName(partnerName) {
             return null;
         });
 }
-// addLocation("Test2", "Hello", "Angelo", "Test", "Test", "CompSAt", "Test", ["2002-3-2", "2002"])
 
   
