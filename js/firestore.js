@@ -27,9 +27,12 @@ let partnersArray = []
 getDocs(colRef)
   .then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      partnersArray.push(doc.data());
-      console.log(partnersArray);
+      if (doc.data().name !== "Test 2" || doc.data().name !== "Test2"){
+        partnersArray.push(doc.data());
+      }
     });
+    
+    // console.log(partnersArray);
 
     // populate ul with partners
     partnersArray.forEach((partner) => {

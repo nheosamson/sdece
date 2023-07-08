@@ -9,11 +9,43 @@ var searchControl = L.esri.Geocoding.geosearch().addTo(map);
 var results = L.layerGroup().addTo(map);
 var popup = L.popup();
 
-function onclickmarker(e)
-{
-	popup.setLatLng(e.latlng)
-		.setContent("You clicked the popup at " + e.latlng.toString())
-		.openOn(map);
+// function onclickmarker(e)
+// {
+// 	popup.setLatLng(e.latlng)
+// 		.setContent("You clicked the popup at " + e.latlng.toString())
+// 		.openOn(map);
+// }
+
+/* 
+	API call for searching, use for a search bar, returns a list based on this link:
+	https://nominatim.openstreetmap.org/ui/search.html
+
+	Create a search function to implement this.
+
+	Currently, upon calling this, markers will be created in the map that satisfies these locations, otherwise none.
+*/
+async function searchLocation(loc){
+	var parsed_loc = encodeURIComponent(loc.toLowerCase().replace(/[^a-z0-9 _-]+/gi, '-'));
+	var api_search = 'https://nominatim.openstreetmap.org/search?q=';
+	var link = api_search.concat(parsed_loc).concat('&format=json');
+	console.log(link);
+
+	var response = await fetch(link);
+
+	fetch(link)
+	.then(
+		response => response.json()
+	)
+	.then(
+		json => {
+			console.log(json);
+			json.forEach(function(entry, index){
+				console.log(entry);
+				var marker = L.marker([parseFloat(entry['lat']), parseFloat(entry['lon'])]);
+				results.addLayer(marker);
+			})
+		}
+	)
 }
 
 searchControl.on('results', function (data) {
@@ -47,10 +79,14 @@ searchControl.on('results', function (data) {
 // marker2.on('click', onclickmarker);
 
 
-// function onMapClick(e) {
-// 	popup
-// 		.setLatLng(e.latlng)
-// 		.setContent("You clicked the map at " + e.latlng.toString())
-// 		.openOn(map);
-// }
-// map.on('click', onMapClick);
+function onMapClick(e) {
+	popup
+		.setLatLng(e.latlng)
+		.setContent(e.latlng.toString())
+		.openOn(map);
+
+	console.log("You clicked the map at " + e.latlng.toString());
+}
+map.on('click', onMapClick);
+
+searchLocation("Industrial Valley Elementary School");
