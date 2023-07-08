@@ -38,16 +38,19 @@ getDocs(colRef)
     partnersArray.forEach((partner) => {
       console.log(partner.name);
       const containerDiv = document.createElement('div');
-      const img = document.createElement('img');
+      const img = document.createElement('svg');
       const listItem = document.createElement('li');
       const anchor = document.createElement('a');
 
       // set attributes
-      img.src = 'Location Icon.png';
-      img.style.height = '22px';
-      img.style.alignItems = 'left';
       anchor.href = '#';
       anchor.textContent = partner.name;
+
+      // add class to variables
+      containerDiv.classList.add("accordion");
+      img.classList.add("accordion");
+      listItem.classList.add("accordion");
+      anchor.classList.add("accordion");
 
       // append to DOM
       containerDiv.appendChild(img);
