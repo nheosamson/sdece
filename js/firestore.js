@@ -1,7 +1,9 @@
 // FIRESTORE DATABASE
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, query, where, getDoc } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
+
+
 
 // Your Firestore code here
 
@@ -21,6 +23,33 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const colRef = collection(db, 'partners')
 let partnersArray = []
+
+export function getDocIdByPartnerName(partnerName) {
+  return getDocs(query(colRef, where('name', '==', partnerName)))
+      .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+              // Assuming there is only one document with the given partner name
+              const doc = querySnapshot.docs[0];
+              return doc.id;
+          } else {
+              console.log("No matching document found.");
+              return null;
+          }
+      })
+      .catch((error) => {
+          console.error("Error getting documents: ", error);
+          return null;
+      });
+}
+
+export function getDocByID(docId) {
+  const docReference = doc(db, 'partners', docId);
+  let docObj = {}
+  return getDoc(docReference).then((doc) =>{
+    docObj = doc.data();
+    return docObj;
+  })
+}
 
 // get docs from firestore
 
@@ -51,6 +80,7 @@ getDocs(colRef)
       img.classList.add("accordion");
       listItem.classList.add("accordion");
       anchor.classList.add("accordion");
+      anchor.classList.add("link");
 
       // append to DOM
       containerDiv.appendChild(img);
@@ -58,6 +88,7 @@ getDocs(colRef)
       containerDiv.appendChild(listItem);
       locationList.appendChild(containerDiv);
     });
+
   })
   .catch((error) => {
     console.error("Error getting documents: ", error);
@@ -66,7 +97,7 @@ getDocs(colRef)
 
 
 
-export function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates) {
+export function addLocation(name, activity, admuContact, admuEmail, admuOffice, org, partnerContact, dates, latitude, longitude) {
 	addDoc(colRef, {
 	  name: name,
 	  activity: activity,
@@ -75,7 +106,9 @@ export function addLocation(name, activity, admuContact, admuEmail, admuOffice, 
 	  "`admu-office`": admuOffice,
 	  org: org,
 	  "`partner-contact`": partnerContact,
-	  dates: dates
+	  dates: dates,
+    Latitude: latitude,
+    Longitude: longitude
 	})
 	.then((docRef) => {
 	  console.log("Document written with ID: ", docRef.id);
@@ -108,22 +141,4 @@ export function editLocation(docId, name, activity, admuContact, admuEmail, admu
 	  });
 }
 
-export function getDocIdByPartnerName(partnerName) {
-    return getDocs(query(colRef, where('name', '==', partnerName)))
-        .then((querySnapshot) => {
-            if (!querySnapshot.empty) {
-                // Assuming there is only one document with the given partner name
-                const doc = querySnapshot.docs[0];
-                return doc.id;
-            } else {
-                console.log("No matching document found.");
-                return null;
-            }
-        })
-        .catch((error) => {
-            console.error("Error getting documents: ", error);
-            return null;
-        });
-}
 
-  
