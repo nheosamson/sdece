@@ -1,12 +1,14 @@
-body { margin:0; padding:0; }
+body {
+  margin: 0;
+  padding: 0;
+}
 #map {
   position: fixed;
-  top:0;
-  bottom:0;
-  right:0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   height: 100%;
   width: 75%;
-
 }
 
 .logo-container {
@@ -21,13 +23,13 @@ body { margin:0; padding:0; }
   width: 48px;
 }
 
-.sidenav { 
+.sidenav {
   display: inline-flex;
   height: 100%;
   width: 25%;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -40,19 +42,19 @@ body { margin:0; padding:0; }
 }
 
 div.main {
-    margin-left: 420px;
-    padding: 2px;
-    height: 100%;
+  margin-left: 420px;
+  padding: 2px;
+  height: 100%;
 }
 
 li {
-    padding-bottom: 20px;
-    padding-left: 10px;
-    list-style-type: none;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  list-style-type: none;
 }
 
 .heading {
-  color: #FCFEFF;
+  color: #fcfeff;
   font-family: Garamond;
   font-size: 24px;
   font-style: normal;
@@ -65,20 +67,20 @@ li {
 }
 
 .label {
-    padding-left: 10px;
-    text-align: left;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    text-decoration: none;
-    color: #979797; /* Gray */
-    margin: 8px;
-    vertical-align: middle;
+  padding-left: 10px;
+  text-align: left;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+  color: #979797; /* Gray */
+  margin: 8px;
+  vertical-align: middle;
 }
 
 .label:hover {
-  color: #49A2BB; /* Viking */
+  color: #49a2bb; /* Viking */
 }
 
 .label:active {
@@ -101,11 +103,11 @@ button.label-font {
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  color:#568D9E;
+  color: #568d9e;
 }
 
 button:hover {
-  background-color: #F7F9F9;
+  background-color: #f7f9f9;
 }
 
 div.buttons {
@@ -115,7 +117,7 @@ div.buttons {
   align-items: flex-start;
   gap: 18px;
   align-self: stretch;
-  border-bottom: 1px solid #CBD5E0;
+  border-bottom: 1px solid #cbd5e0;
 }
 
 .icon {
@@ -130,7 +132,6 @@ div.accordion {
   align-items: flex-start;
   gap: 16px;
   align-self: stretch;
- 
 }
 
 li.accordion {
@@ -155,15 +156,13 @@ a.accordion {
 }
 
 img.accordion {
-  fill: #91C9DB;
-
+  fill: #91c9db;
 }
 
-
 .entries {
-  background-color: #FAFAFA;
-  overflow-x:hidden;
-  overflow-y:auto;
+  background-color: #fafafa;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .entries {
@@ -182,4 +181,38 @@ h1.entries {
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  }
+}
+
+/* CSS for the modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 5%;
+  width: 75%; /* Adjust the width of the modal as needed */
+  height: 100%; /* Adjust the height of the modal as needed */
+  overflow-y: auto;
+}
+
+.modal-content {
+  background-color: #fafafa;
+  margin: 10% auto;
+  padding: 20px;
+  width: 30%;
+  max-width: 600px; /* Adjust the max-width of the modal content as needed */
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
