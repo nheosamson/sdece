@@ -1,10 +1,10 @@
 import { getDocIdByPartnerName, getDocByID } from "./firestore.js";
 
+var map = L.map("map").setView([14.651, 121.052], 13);
 
-var map = L.map('map').setView([14.651, 121.052], 13);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution:
+    '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
 var searchControl = L.esri.Geocoding.geosearch().addTo(map);
@@ -27,38 +27,56 @@ var popup = L.popup();
 
 	Currently, upon calling this, markers will be created in the map that satisfies these locations, otherwise none.
 */
-async function searchLocation(loc){
-	var parsed_loc = encodeURIComponent(loc.toLowerCase().replace(/[^a-z0-9 _-]+/gi, '-'));
-	var api_search = 'https://nominatim.openstreetmap.org/search?q=';
-	var link = api_search.concat(parsed_loc).concat('&format=json');
-	console.log(link);
+async function searchLocation(loc) {
+  var parsed_loc = encodeURIComponent(
+    loc.toLowerCase().replace(/[^a-z0-9 _-]+/gi, "-")
+  );
+  var api_search = "https://nominatim.openstreetmap.org/search?q=";
+  var link = api_search.concat(parsed_loc).concat("&format=json");
+  console.log(link);
 
-	var response = await fetch(link);
+  var response = await fetch(link);
 
-	fetch(link)
-	.then(
-		response => response.json()
-	)
-	.then(
-		json => {
-			console.log(json);
-			json.forEach(function(entry, index){
-				console.log(entry);
-				var marker = L.marker([parseFloat(entry['lat']), parseFloat(entry['lon'])]);
-				results.addLayer(marker);
-			})
-		}
-	)
+  fetch(link)
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json);
+      json.forEach(function (entry, index) {
+        console.log(entry);
+        var marker = L.marker([
+          parseFloat(entry["lat"]),
+          parseFloat(entry["lon"]),
+        ]);
+        var popupContent = `
+          <b>${loc}</b>          
+		  <br>
+          <button class="editButton" data-loc="${loc}">Edit Location</button>
+        `;
+        marker.bindPopup(popupContent);
+        results.addLayer(marker);
+        marker.on("popupopen", function () {
+          var editButtons = document.getElementsByClassName("editButton");
+          for (var i = 0; i < editButtons.length; i++) {
+            editButtons[i].addEventListener("click", function () {
+              var partnerName = this.getAttribute("data-loc");
+              window.open(
+                `editloc.html?partnerName=${encodeURIComponent(partnerName)}`,
+                "_blank"
+              );
+            });
+          }
+        });
+      });
+    });
 }
 
-searchControl.on('results', function (data) {
-	results.clearLayers();
-	for (var i = data.results.length - 1; i >= 0; i--) {
-		var marker = L.marker(data.results[i].latlng);
-		console.log(marker);
-		results.addLayer(marker);
-		marker.on("click", onclickmarker);
-	}
+searchControl.on("results", function (data) {
+  results.clearLayers();
+  for (var i = data.results.length - 1; i >= 0; i--) {
+    var marker = L.marker(data.results[i].latlng);
+    console.log(marker);
+    results.addLayer(marker);
+  }
 });
 
 // var map = L.map('map').setView([14.651, 121.052], 13);
@@ -81,37 +99,31 @@ searchControl.on('results', function (data) {
 // marker.on('click', onclickmarker);
 // marker2.on('click', onclickmarker);
 
-
 function onMapClick(e) {
-	popup
-		.setLatLng(e.latlng)
-		.setContent(e.latlng.toString())
-		.openOn(map);
+  popup.setLatLng(e.latlng).setContent(e.latlng.toString()).openOn(map);
 
-	console.log("You clicked the map at " + e.latlng.toString());
+  console.log("You clicked the map at " + e.latlng.toString());
 }
-map.on('click', onMapClick);
+map.on("click", onMapClick);
 
 searchLocation("Industrial Valley Elementary School");
 map.panTo(new L.LatLng(14.652538, 121.077818));
 
-
 //search loc through name, check if present in firebase
 //get latlng through firebase, then call searchloc, and then pan through the latlng in firebase
 
-
 function panLocation(name) {
-	getDocIdByPartnerName(name)
-	.then((docId) => {
-		getDocByID(docId).then((doc) => {
-			console.log(doc);
-			console.log(`Panning to ${doc.Latitude}, ${doc.Longitude}`);
-			map.panTo(new L.LatLng(doc.Latitude, doc.Longitude));
-			console.log(`Searching for ${doc.name}`);
-			searchLocation(doc.name);
-		})
-	})}
-  
-document.getElementById('locationList').addEventListener('click', (event) => {
-	panLocation(event.target.innerHTML);
-})
+  getDocIdByPartnerName(name).then((docId) => {
+    getDocByID(docId).then((doc) => {
+      console.log(doc);
+      console.log(`Panning to ${doc.Latitude}, ${doc.Longitude}`);
+      map.panTo(new L.LatLng(doc.Latitude, doc.Longitude));
+      console.log(`Searching for ${doc.name}`);
+      searchLocation(doc.name);
+    });
+  });
+}
+
+document.getElementById("locationList").addEventListener("click", (event) => {
+  panLocation(event.target.innerHTML);
+});
