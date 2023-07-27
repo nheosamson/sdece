@@ -100,10 +100,31 @@ searchControl.on("results", function (data) {
 // marker2.on('click', onclickmarker);
 
 function onMapClick(e) {
-  popup.setLatLng(e.latlng).setContent(e.latlng.toString()).openOn(map);
+  const lat = e.latlng.lat;
+  const lng = e.latlng.lng;
 
-  console.log("You clicked the map at " + e.latlng.toString());
+  var popupContent = `
+    <p>Location: ${lat}, ${lng}</p>
+    <button class="addButton" data-lat="${lat}" data-lng="${lng}">Add Location</button>
+  `;
+
+  popup.setLatLng(e.latlng).setContent(popupContent).openOn(map);
+
+  // Add event listener to the "Add Location" button
+  var addButton = document.querySelector(".addButton");
+  addButton.addEventListener("click", function () {
+    const lat = this.getAttribute("data-lat");
+    const lng = this.getAttribute("data-lng");
+
+    window.open(
+      `addloc.html?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(
+        lng
+      )}`,
+      "_blank"
+    );
+  });
 }
+
 map.on("click", onMapClick);
 
 searchLocation("Industrial Valley Elementary School");
