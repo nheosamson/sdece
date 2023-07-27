@@ -10,6 +10,9 @@
             document.getElementById("submit_form").addEventListener("click", handleFormSubmit);
 
             function handleFormSubmit() {
+                const urlParams = new URLSearchParams(window.location.search);
+                var latitude = urlParams.get('lat');
+                var longitude = urlParams.get('lng');
                 var partner = document.getElementById("partner").value;
                 var partnerContactPerson = document.getElementById("partner_contact-person").value;
                 var organization = document.getElementById("organization").value;
@@ -34,7 +37,9 @@
                     ateneoOffice,
                     organization,
                     partnerContactPerson,
-                    parsedDatesOfPartnership
+                    parsedDatesOfPartnership,
+                    latitude,
+                    longitude
                 );
                 
                 document.getElementById("partner").value = "";
