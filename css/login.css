@@ -1,0 +1,30 @@
+
+/* Simple styling for demonstration */
+body {
+  font-family: Arial, sans-serif;
+}
+form {
+  max-width: 300px;
+  margin: 50px auto;
+}
+input {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.8;
+}
+#error {
+  color: red;
+  margin-top: 10px;
+}
