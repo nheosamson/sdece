@@ -73,28 +73,43 @@ getDocs(colRef)
     // populate ul with partners
     partnersArray.forEach((partner) => {
       console.log(partner.name);
+
+      // Creating DOM elements
       const containerDiv = document.createElement("div");
       const img = document.createElement("svg");
       const listItem = document.createElement("li");
       const anchor = document.createElement("a");
+      const nameDiv = document.createElement("div");
+      const addressDiv = document.createElement("div");
+      const activityDiv = document.createElement("div");
 
-      // set attributes
+      // Set attributes
       anchor.href = "#";
-      anchor.textContent = partner.name;
+
       anchor.addEventListener("click", () => {
         showModal(partner);
       });
 
-      // add class to variables
-      containerDiv.classList.add("accordion");
-      img.classList.add("accordion");
-      listItem.classList.add("accordion");
-      anchor.classList.add("accordion");
-      anchor.classList.add("link");
+      // Adding classes and setting text content
+      nameDiv.classList.add("name");
+      addressDiv.classList.add("address");
+      activityDiv.classList.add("activity");
 
-      // append to DOM
-      containerDiv.appendChild(img);
+      nameDiv.textContent = partner.name;
+      addressDiv.textContent =
+        "Latitude: " + partner.Latitude + " Longitude: " + partner.Longitude;
+      activityDiv.textContent = partner.activity;
+
+      listItem.classList.add("accordion");
+      anchor.classList.add("accordion", "link");
+
+      // Append elements to the DOM
+      anchor.appendChild(nameDiv);
+      anchor.appendChild(addressDiv);
+      anchor.appendChild(activityDiv);
+
       listItem.appendChild(anchor);
+      containerDiv.appendChild(img);
       containerDiv.appendChild(listItem);
       locationList.appendChild(containerDiv);
     });
@@ -112,8 +127,7 @@ function showModal(partner) {
 
   // Create div elements for each piece of information
   const nameDiv = document.createElement("div");
-  const latitudeDiv = document.createElement("div");
-  const longitudeDiv = document.createElement("div");
+  const addressDiv = document.createElement("div");
   const contactPersonDiv = document.createElement("div");
   const activityDiv = document.createElement("div");
   const admuContactDiv = document.createElement("div");
@@ -122,10 +136,15 @@ function showModal(partner) {
   const orgDiv = document.createElement("div");
   const datesDiv = document.createElement("div");
 
+  nameDiv.classList.add("modal-name");
+  addressDiv.classList.add("modal-address");
+
+  activityDiv.classList.add("modal-activity");
+
   // Set the content of each div
-  nameDiv.textContent = "Name: " + partner.name;
-  latitudeDiv.textContent = "Latitude: " + partner.Latitude;
-  longitudeDiv.textContent = "Longitude: " + partner.Longitude;
+  nameDiv.textContent = partner.name;
+  addressDiv.textContent =
+    "Latitude: " + partner.Latitude + " Longitude: " + partner.Longitude;
   contactPersonDiv.textContent =
     "Contact Person: " + partner["`partner-contact`"];
   activityDiv.textContent = "Activity: " + partner.activity;
@@ -136,8 +155,7 @@ function showModal(partner) {
 
   // Append the div elements to the modal content
   modalContent.appendChild(nameDiv);
-  modalContent.appendChild(latitudeDiv);
-  modalContent.appendChild(longitudeDiv);
+  modalContent.appendChild(addressDiv);
   modalContent.appendChild(contactPersonDiv);
   modalContent.appendChild(activityDiv);
   modalContent.appendChild(admuContactDiv);
