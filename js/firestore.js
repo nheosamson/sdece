@@ -34,7 +34,14 @@ const colRef = collection(db, "partners");
 let partnersArray = [];
 
 export function getDocIdByPartnerName(partnerName) {
-  return getDocs(query(colRef, where("name", "==", partnerName)))
+  const endName = partnerName.replace(/\s/g, "\uf8ff");
+  return getDocs(
+    query(
+      colRef,
+      where("name", ">=", partnerName),
+      where("name", "<=", partnerName + endName)
+    )
+  )
     .then((querySnapshot) => {
       if (!querySnapshot.empty) {
         // Assuming there is only one document with the given partner name

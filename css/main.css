@@ -264,3 +264,44 @@ h1.entries {
   text-decoration: none;
   cursor: pointer;
 }
+
+.partner-geolocation {
+  display: flex;
+  align-items: center;
+}
+
+.editButton {
+  display: flex;
+  padding: 16px 24px;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 0;
+  background-color: #73abbc;
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-left: auto;
+  margin-top: 32px;
+}
+
+.partner-info {
+  display: flex;
+  margin: 0;
+}
+
+.partner-label,
+.partner-value {
+  flex: 1;
+  margin: 8px 0 !important;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
