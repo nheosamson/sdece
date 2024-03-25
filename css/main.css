@@ -280,30 +280,26 @@ h1.entries {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  font-weight: bolder;
+  font-weight: 700;
 }
 
 .leaflet-buttons {
   display: flex;
   justify-content: space-between;
 }
+
 .deleteButton {
-  display: flex;
-  padding: 16px 24px;
-  width: fit-content;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 8px;
-  border: 0;
   color: #d64747;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 }
 
-.editButton {
+.editButton,
+.addButton {
+  color: #3d97af;
+}
+
+.deleteButton,
+.editButton,
+.addButton {
   display: flex;
   padding: 16px 24px;
   width: fit-content;
@@ -312,11 +308,18 @@ h1.entries {
   gap: 8px;
   border-radius: 8px;
   border: 0;
-  color: #3d97af;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  background-color: transparent;
+}
+
+.deleteButton:hover,
+.editButton:hover,
+.addButton:hover {
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .partner-value {

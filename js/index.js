@@ -32,13 +32,6 @@ async function searchLocation(loc) {
         var popupContent = `
         <div class="leaflet-popup-container">
           <h2 class="partner-header">${loc}</h2>          
-          <div class="partner-geolocation">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C11.337 11.5 10.7011 11.2366 10.2322 10.7678C9.76339 10.2989 9.5 9.66304 9.5 9C9.5 8.33696 9.76339 7.70107 10.2322 7.23223C10.7011 6.76339 11.337 6.5 12 6.5C12.663 6.5 13.2989 6.76339 13.7678 7.23223C14.2366 7.70107 14.5 8.33696 14.5 9C14.5 9.66304 14.2366 10.2989 13.7678 10.7678C13.2989 11.2366 12.663 11.5 12 11.5Z" fill="#91C9DB"/>
-            </svg>
-            ${entry["lat"] + entry["lon"]}
-            <br>
-            </div>
           <div class="partner-contact">
           </div>
           <div class="leaflet-buttons">
@@ -90,7 +83,13 @@ function onMapClick(e) {
   const lng = e.latlng.lng;
 
   var popupContent = `
-    <p>Location: ${lat}, ${lng}</p>
+      <div class="partner-geolocation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C11.337 11.5 10.7011 11.2366 10.2322 10.7678C9.76339 10.2989 9.5 9.66304 9.5 9C9.5 8.33696 9.76339 7.70107 10.2322 7.23223C10.7011 6.76339 11.337 6.5 12 6.5C12.663 6.5 13.2989 6.76339 13.7678 7.23223C14.2366 7.70107 14.5 8.33696 14.5 9C14.5 9.66304 14.2366 10.2989 13.7678 10.7678C13.2989 11.2366 12.663 11.5 12 11.5Z" fill="#91C9DB"/>
+            </svg>
+            ${lat} + ${lng}
+            <br>
+        </div>
     <button class="addButton" data-lat="${lat}" data-lng="${lng}">Add Location</button>
   `;
 
@@ -150,7 +149,7 @@ function getDetails(name) {
           </div>
 
           <div class="partner-info">
-            <p class="partner-label">Organization/Unit</p>
+            <p class="partner-label">Organization / Unit</p>
             <p class="partner-value"> ${doc.org}</p>
           </div>
           
@@ -162,20 +161,13 @@ function getDetails(name) {
 
             <hr>
             <h2>Ateneo Office Oversight</h2> 
-          <div class="partner-info">
-            <p class="partner-label">Name of Office</p>
-            <p class="partner-value"> ${doc["admu-office"]}</p>
-          </div>
 
           <div class="partner-info">          
-            <p class="partner-label">Contact Person</p>
+            <p class="partner-label">${doc["admu-office"]}</p>
             <p class="partner-value"> ${doc["admu-contact"]}</p>
-          </div>
-          
-          <div class="partner-info">
-            <p class="partner-label">Email Address</p>
             <p class="partner-value"> ${doc["admu-email"]}</p>
-          </div>
+            </div>
+          
           `;
         } else {
           console.log("Div with class 'partner-contact' not found.");
