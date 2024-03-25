@@ -270,6 +270,39 @@ h1.entries {
   align-items: center;
 }
 
+.leaflet-popup-container h2 {
+  overflow: hidden;
+  color: #387181;
+  text-overflow: ellipsis;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-weight: bolder;
+}
+
+.leaflet-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.deleteButton {
+  display: flex;
+  padding: 16px 24px;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 0;
+  color: #d64747;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
 .editButton {
   display: flex;
   padding: 16px 24px;
@@ -279,29 +312,41 @@ h1.entries {
   gap: 8px;
   border-radius: 8px;
   border: 0;
-  background-color: #73abbc;
-  color: #fff;
+  color: #3d97af;
   font-family: Montserrat;
-  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-left: auto;
-  margin-top: 32px;
 }
 
-.partner-info {
-  display: flex;
-  margin: 0;
-}
-
-.partner-label,
 .partner-value {
-  flex: 1;
-  margin: 8px 0 !important;
-  font-family: Montserrat;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Hind;
   font-size: 12px;
   font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  line-height: 110%;
+  letter-spacing: 0.32px;
+  margin: 0 !important;
+}
+
+.partner-label {
+  color: #3d97af;
+  font-family: Hind;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 0.36px;
+  font-size: 14px;
+  margin: 12px 0 8px 0 !important;
+}
+
+.partner-activity {
+  color: #2f2f2f;
+  font-family: Hind;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 0.4px;
 }
