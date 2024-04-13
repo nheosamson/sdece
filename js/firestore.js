@@ -110,7 +110,7 @@ getDocs(colRef)
       if (partner.activities.length > 0)      // check if list of activities is present, otherwise is skipped to avoid errors
       {
         partner.activities.forEach( (activity) => {
-          activityDiv.textContent = activityDiv.textContent + activity.activityName + "\n";
+          activityDiv.innerHTML += activity.activityName + "<br/>";       // there might be a better way to display multiple activities
         });
       }
       
@@ -160,9 +160,9 @@ function showModal(partner) {
   nameDiv.textContent = partner.partnerName;
   addressDiv.textContent =
     "Latitude: " + partner.location.latitude + " Longitude: " + partner.location.longitude;
-    contactPersonDiv.textContent = "Contact Person: " + activity['partnerContact'];
+    contactPersonDiv.textContent = "Contact Person: " + partner.partnerContact;
 
-  partner.activities.forEach((activity) => {
+  partner.activities.forEach((activity) => {                          // lists down all activities, format it to how it's designed on Figma
     activityDiv.textContent = "Activity: " + activity['activityName'];
     admuContactDiv.textContent = "AdMU Contact: " + activity['ateneoContactEmail'];
     admuEmailDiv.textContent = "AdMU Email: " + activity['ateneoOverseeingOfficeEmail'];

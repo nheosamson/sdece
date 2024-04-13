@@ -136,7 +136,7 @@ function getDetails(name) {
         // Insert the partner details into the div with class "partner-contact"
         const partnerContactDiv = document.querySelector(".partner-contact");
         if (partnerContactDiv) {
-          doc.activities.forEach( (activity) => {
+          doc.activities.forEach( (activity) => {       // current lists down all of activities, revamp if needed
             partnerContactDiv.innerHTML += `
             <div class="partner-info">
               <p class="partner-activity"> ${activity.activityName}</p>
