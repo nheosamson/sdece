@@ -30,7 +30,7 @@ const firebaseConfig = {
 };
 initializeApp(firebaseConfig);
 const db = getFirestore();
-const colRef = collection(db, "partners");
+const colRef = collection(db, "partners-2");
 let partnersArray = [];
 
 export function getDocIdByPartnerName(partnerName) {
@@ -59,7 +59,7 @@ export function getDocIdByPartnerName(partnerName) {
 }
 
 export function getDocByID(docId) {
-  const docReference = doc(db, "partners", docId);
+  const docReference = doc(db, "partners-2", docId);
   let docObj = {};
   return getDoc(docReference).then((doc) => {
     docObj = doc.data();
@@ -79,7 +79,7 @@ getDocs(colRef)
 
     // populate ul with partners
     partnersArray.forEach((partner) => {
-      console.log(partner.name);
+      console.log(partner);
 
       // Creating DOM elements
       const containerDiv = document.createElement("div");
@@ -102,9 +102,8 @@ getDocs(colRef)
       addressDiv.classList.add("address");
       activityDiv.classList.add("activity");
 
-      nameDiv.textContent = partner.name;
-      addressDiv.textContent =
-        "Latitude: " + partner.Latitude + " Longitude: " + partner.Longitude;
+      nameDiv.textContent = partner.partnerName;
+      addressDiv.textContent = "Latitude: " + partner.location.latitude.toString() + " Longitude: " + partner.location.longitude.toString();
       activityDiv.textContent = partner.activity;
 
       listItem.classList.add("accordion");
@@ -151,7 +150,7 @@ function showModal(partner) {
   // Set the content of each div
   nameDiv.textContent = partner.name;
   addressDiv.textContent =
-    "Latitude: " + partner.Latitude + " Longitude: " + partner.Longitude;
+    "Latitude: " + partner.location.latitude + " Longitude: " + partner.location.longitude;
   contactPersonDiv.textContent =
     "Contact Person: " + partner["`partner-contact`"];
   activityDiv.textContent = "Activity: " + partner.activity;
@@ -231,7 +230,7 @@ export function editLocation(
   partnerContact,
   dates
 ) {
-  const docReference = doc(db, "partners", docId);
+  const docReference = doc(db, "partners-2", docId);
   const updateData = {
     name: name,
     activity: activity,

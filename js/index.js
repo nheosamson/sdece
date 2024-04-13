@@ -118,8 +118,8 @@ function panLocation(name) {
   getDocIdByPartnerName(name).then((docId) => {
     getDocByID(docId).then((doc) => {
       console.log(doc);
-      console.log(`Panning to ${doc.Latitude}, ${doc.Longitude}`);
-      map.panTo(new L.LatLng(doc.Latitude, doc.Longitude));
+      console.log(`Panning to ${doc.location.latitude}, ${doc.location.longitude}`);
+      map.panTo(new L.LatLng(doc.location.latitude, doc.location.longitude));
       console.log(`Searching for ${doc.name}`);
       searchLocation(doc.name);
     });
