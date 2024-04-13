@@ -110,18 +110,16 @@ function onMapClick(e) {
 }
 
 map.on("click", onMapClick);
-
-searchLocation("Industrial Valley Elementary School");
 map.panTo(new L.LatLng(14.652538, 121.077818));
 
 function panLocation(name) {
   getDocIdByPartnerName(name).then((docId) => {
     getDocByID(docId).then((doc) => {
       console.log(doc);
-      console.log(`Panning to ${doc.Latitude}, ${doc.Longitude}`);
-      map.panTo(new L.LatLng(doc.Latitude, doc.Longitude));
-      console.log(`Searching for ${doc.name}`);
-      searchLocation(doc.name);
+      console.log(`Panning to ${doc.location.latitude}, ${doc.location.longitude}`);
+      map.panTo(new L.LatLng(doc.location.latitude, doc.location.longitude));
+      console.log(`Searching for ${doc.partnerName}`);
+      searchLocation(doc.partnerName);
     });
   });
 }
@@ -138,37 +136,40 @@ function getDetails(name) {
         // Insert the partner details into the div with class "partner-contact"
         const partnerContactDiv = document.querySelector(".partner-contact");
         if (partnerContactDiv) {
-          partnerContactDiv.innerHTML = `
-          <div class="partner-info">
-            <p class="partner-activity"> ${doc.activity}</p>
-          </div>
-
-          <div class="partner-info">
-            <p class="partner-label">Contact Person</p>
-            <p class="partner-value">${doc["partner-contact"]}</p>
-          </div>
-
-          <div class="partner-info">
-            <p class="partner-label">Organization / Unit</p>
-            <p class="partner-value"> ${doc.org}</p>
-          </div>
-          
-
-          <div class="partner-info">
-            <p class="partner-label">Date/s of Partnership</p>
-            <p class="partner-value"> ${doc.dates}</p>
-          </div>
-
-            <hr>
-            <h2>Ateneo Office Oversight</h2> 
-
-          <div class="partner-info">          
-            <p class="partner-label">${doc["admu-office"]}</p>
-            <p class="partner-value"> ${doc["admu-contact"]}</p>
-            <p class="partner-value"> ${doc["admu-email"]}</p>
+          doc.activities.forEach( (activity) => {       // current lists down all of activities, revamp if needed
+            partnerContactDiv.innerHTML += `
+            <div class="partner-info">
+              <p class="partner-activity"> ${activity.activityName}</p>
             </div>
+
+            <div class="partner-info">
+              <p class="partner-label">Contact Person</p>
+              <p class="partner-value">${activity.ateneoContactPerson}</p>
+            </div>
+
+            <div class="partner-info">
+              <p class="partner-label">Organization / Unit</p>
+              <p class="partner-value"> ${activity.ateneoOrganization}</p>
+            </div>
+            
+
+            <div class="partner-info">
+              <p class="partner-label">Date/s of Partnership</p>
+              <p class="partner-value"> ${activity.activityDate.toDate()}</p>   <!-- find a way to format this into just Date -->
+            </div>
+
+              <hr>
+              <h2>Ateneo Office Oversight</h2> 
+
+            <div class="partner-info">          
+              <p class="partner-label">${activity.ateneoOverseeingOffice}</p>
+              <p class="partner-value"> ${activity.ateneoContactEmail}</p>
+              <p class="partner-value"> ${activity.ateneoOverseeingOfficeEmail}</p>
+              </div>
+            
+            `;
+          });
           
-          `;
         } else {
           console.log("Div with class 'partner-contact' not found.");
         }

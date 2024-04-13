@@ -30,7 +30,7 @@ const firebaseConfig = {
 };
 initializeApp(firebaseConfig);
 const db = getFirestore();
-const colRef = collection(db, "partners");
+const colRef = collection(db, "partners-2");
 let partnersArray = [];
 
 export function getDocIdByPartnerName(partnerName) {
@@ -38,8 +38,8 @@ export function getDocIdByPartnerName(partnerName) {
   return getDocs(
     query(
       colRef,
-      where("name", ">=", partnerName),
-      where("name", "<=", partnerName + endName)
+      where("partnerName", ">=", partnerName),
+      where("partnerName", "<=", partnerName + endName)
     )
   )
     .then((querySnapshot) => {
@@ -59,7 +59,8 @@ export function getDocIdByPartnerName(partnerName) {
 }
 
 export function getDocByID(docId) {
-  const docReference = doc(db, "partners", docId);
+  const docReference = doc(db, "partners-2", docId);
+  console.log(docReference);
   let docObj = {};
   return getDoc(docReference).then((doc) => {
     docObj = doc.data();
@@ -79,7 +80,7 @@ getDocs(colRef)
 
     // populate ul with partners
     partnersArray.forEach((partner) => {
-      console.log(partner.name);
+      console.log(partner);
 
       // Creating DOM elements
       const containerDiv = document.createElement("div");
@@ -102,10 +103,17 @@ getDocs(colRef)
       addressDiv.classList.add("address");
       activityDiv.classList.add("activity");
 
-      nameDiv.textContent = partner.name;
-      addressDiv.textContent =
-        "Latitude: " + partner.Latitude + " Longitude: " + partner.Longitude;
-      activityDiv.textContent = partner.activity;
+      nameDiv.textContent = partner.partnerName;
+      addressDiv.textContent = partner.partnerAddress;
+      activityDiv.textContent = "";
+
+      if (partner.activities.length > 0)      // check if list of activities is present, otherwise is skipped to avoid errors
+      {
+        partner.activities.forEach( (activity) => {
+          activityDiv.innerHTML += activity.activityName + "<br/>";       // there might be a better way to display multiple activities
+        });
+      }
+      
 
       listItem.classList.add("accordion");
       anchor.classList.add("accordion", "link");
@@ -149,16 +157,19 @@ function showModal(partner) {
   activityDiv.classList.add("modal-activity");
 
   // Set the content of each div
-  nameDiv.textContent = partner.name;
+  nameDiv.textContent = partner.partnerName;
   addressDiv.textContent =
-    "Latitude: " + partner.Latitude + " Longitude: " + partner.Longitude;
-  contactPersonDiv.textContent =
-    "Contact Person: " + partner["`partner-contact`"];
-  activityDiv.textContent = "Activity: " + partner.activity;
-  admuContactDiv.textContent = "AdMU Contact: " + partner["`admu-contact`"];
-  admuEmailDiv.textContent = "AdMU Email: " + partner["`admu-email`"];
-  admuOfficeDiv.textContent = "AdMU Office: " + partner["`admu-office`"];
-  orgDiv.textContent = "Organization: " + partner.org;
+    "Latitude: " + partner.location.latitude + " Longitude: " + partner.location.longitude;
+    contactPersonDiv.textContent = "Contact Person: " + partner.partnerContact;
+
+  partner.activities.forEach((activity) => {                          // lists down all activities, format it to how it's designed on Figma
+    activityDiv.textContent = "Activity: " + activity['activityName'];
+    admuContactDiv.textContent = "AdMU Contact: " + activity['ateneoContactEmail'];
+    admuEmailDiv.textContent = "AdMU Email: " + activity['ateneoOverseeingOfficeEmail'];
+    admuOfficeDiv.textContent = "AdMU Office: " + partner["`ateneoOverseeingOfficeEmail`"];
+    orgDiv.textContent = "Organization: " + partner.org;
+  });
+  
 
   // Append the div elements to the modal content
   modalContent.appendChild(nameDiv);
@@ -231,7 +242,7 @@ export function editLocation(
   partnerContact,
   dates
 ) {
-  const docReference = doc(db, "partners", docId);
+  const docReference = doc(db, "partners-2", docId);
   const updateData = {
     name: name,
     activity: activity,
