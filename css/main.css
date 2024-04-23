@@ -313,6 +313,8 @@ h1.entries {
   font-weight: 600;
   line-height: normal;
   background-color: transparent;
+  margin-top: 8px;
+  flex: 1;
 }
 
 .deleteButton:hover,
@@ -320,6 +322,14 @@ h1.entries {
 .addButton:hover {
   background-color: transparent;
   cursor: pointer;
+}
+
+.editButton:hover {
+  background: rgba(61, 151, 175, 0.1);
+}
+
+.deleteButton:hover {
+  background: rgba(214, 71, 71, 0.1);
 }
 
 .partner-value {
