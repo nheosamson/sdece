@@ -20,7 +20,7 @@ body {
 }
 
 .sidenav {
-  flex: 0 0 30%;
+  flex: 0 0 20%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -62,7 +62,7 @@ li {
 }
 
 .heading {
-  color: #fcfeff;
+  color: #387181;
   font-family: Garamond;
   font-size: 24px;
   font-style: normal;
@@ -151,10 +151,15 @@ img.accordion {
 .entries {
   background-color: #fafafa;
   margin-top: 24px;
+  width: 100%;
 }
 
 ul.accordion {
   padding-inline-start: 0px !important;
+}
+
+.container-entry {
+  width: 100%;
 }
 
 li.accordion {
@@ -217,17 +222,18 @@ h1.entries {
   left: 5%;
   width: 75%; /* Adjust the width of the modal as needed */
   height: 100%; /* Adjust the height of the modal as needed */
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .modal-content {
   background-color: #fafafa;
-  margin: 10% 35%;
+  margin: 7.5% 22.5%;
   padding: 31px 24px;
   width: 30%;
   max-width: 600px;
   border-radius: 8px;
   background-color: #fcfcfc;
+  overflow: hidden;
 }
 
 .modal-name {
@@ -313,8 +319,6 @@ h1.entries {
   font-weight: 600;
   line-height: normal;
   background-color: transparent;
-  margin-top: 8px;
-  flex: 1;
 }
 
 .deleteButton:hover,
@@ -322,14 +326,6 @@ h1.entries {
 .addButton:hover {
   background-color: transparent;
   cursor: pointer;
-}
-
-.editButton:hover {
-  background: rgba(61, 151, 175, 0.1);
-}
-
-.deleteButton:hover {
-  background: rgba(214, 71, 71, 0.1);
 }
 
 .partner-value {

@@ -30,7 +30,7 @@ const firebaseConfig = {
 };
 initializeApp(firebaseConfig);
 const db = getFirestore();
-const colRef = collection(db, "partners-2");
+const colRef = collection(db, "nstp-3");
 let partnersArray = [];
 
 export function getDocIdByPartnerName(partnerName) {
@@ -38,17 +38,18 @@ export function getDocIdByPartnerName(partnerName) {
   return getDocs(
     query(
       colRef,
-      where("partnerName", ">=", partnerName),
-      where("partnerName", "<=", partnerName + endName)
+      where("household_name", ">=", partnerName),
+      where("household_name", "<=", partnerName + endName)
     )
   )
     .then((querySnapshot) => {
+      console.log(querySnapshot);
       if (!querySnapshot.empty) {
         // Assuming there is only one document with the given partner name
         const doc = querySnapshot.docs[0];
         return doc.id;
       } else {
-        console.log("No matching document found.");
+        console.log("EMPTY: No matching document found.");
         return null;
       }
     })
@@ -59,8 +60,7 @@ export function getDocIdByPartnerName(partnerName) {
 }
 
 export function getDocByID(docId) {
-  const docReference = doc(db, "partners-2", docId);
-  console.log(docReference);
+  const docReference = doc(db, "nstp-3", docId);
   let docObj = {};
   return getDoc(docReference).then((doc) => {
     docObj = doc.data();
@@ -69,6 +69,11 @@ export function getDocByID(docId) {
 }
 
 // get docs from firestore
+
+export function getPartnersArray()
+{
+  return partnersArray;
+}
 
 getDocs(colRef)
   .then((querySnapshot) => {
@@ -80,7 +85,6 @@ getDocs(colRef)
 
     // populate ul with partners
     partnersArray.forEach((partner) => {
-      console.log(partner);
 
       // Creating DOM elements
       const containerDiv = document.createElement("div");
@@ -89,7 +93,6 @@ getDocs(colRef)
       const anchor = document.createElement("a");
       const nameDiv = document.createElement("div");
       const addressDiv = document.createElement("div");
-      const activityDiv = document.createElement("div");
 
       // Set attributes
       anchor.href = "#";
@@ -101,27 +104,17 @@ getDocs(colRef)
       // Adding classes and setting text content
       nameDiv.classList.add("name");
       addressDiv.classList.add("address");
-      activityDiv.classList.add("activity");
 
-      nameDiv.textContent = partner.partnerName;
-      addressDiv.textContent = partner.partnerAddress;
-      activityDiv.textContent = "";
-
-      if (partner.activities.length > 0)      // check if list of activities is present, otherwise is skipped to avoid errors
-      {
-        partner.activities.forEach( (activity) => {
-          activityDiv.innerHTML += activity.activityName + "<br/>";       // there might be a better way to display multiple activities
-        });
-      }
+      nameDiv.textContent = partner.household_name;
+      addressDiv.textContent = partner.address + " " + partner.phase;
       
-
       listItem.classList.add("accordion");
       anchor.classList.add("accordion", "link");
+      containerDiv.classList.add("container-entry");
 
       // Append elements to the DOM
       anchor.appendChild(nameDiv);
       anchor.appendChild(addressDiv);
-      anchor.appendChild(activityDiv);
 
       listItem.appendChild(anchor);
       containerDiv.appendChild(img);
@@ -143,44 +136,53 @@ function showModal(partner) {
   // Create div elements for each piece of information
   const nameDiv = document.createElement("div");
   const addressDiv = document.createElement("div");
-  const contactPersonDiv = document.createElement("div");
-  const activityDiv = document.createElement("div");
-  const admuContactDiv = document.createElement("div");
-  const admuEmailDiv = document.createElement("div");
-  const admuOfficeDiv = document.createElement("div");
-  const orgDiv = document.createElement("div");
-  const datesDiv = document.createElement("div");
+  const contactNumberDiv = document.createElement("div");
+  const evacAreaDiv = document.createElement("div");
+  const riskDiv = document.createElement("div");
+  const houseMaterialDiv = document.createElement("div");
+  const isHOANOADiv = document.createElement("div");
+  const residentsDiv = document.createElement("div");
 
   nameDiv.classList.add("modal-name");
   addressDiv.classList.add("modal-address");
-
-  activityDiv.classList.add("modal-activity");
-
-  // Set the content of each div
-  nameDiv.textContent = partner.partnerName;
-  addressDiv.textContent =
-    "Latitude: " + partner.location.latitude + " Longitude: " + partner.location.longitude;
-    contactPersonDiv.textContent = "Contact Person: " + partner.partnerContact;
-
-  partner.activities.forEach((activity) => {                          // lists down all activities, format it to how it's designed on Figma
-    activityDiv.textContent = "Activity: " + activity['activityName'];
-    admuContactDiv.textContent = "AdMU Contact: " + activity['ateneoContactEmail'];
-    admuEmailDiv.textContent = "AdMU Email: " + activity['ateneoOverseeingOfficeEmail'];
-    admuOfficeDiv.textContent = "AdMU Office: " + partner["`ateneoOverseeingOfficeEmail`"];
-    orgDiv.textContent = "Organization: " + partner.org;
-  });
   
 
+  riskDiv.classList.add("modal-activity");
+
+  // Set the content of each div
+  nameDiv.textContent = partner.household_name;
+  addressDiv.textContent = partner.address + " " + partner.phase;
+  contactNumberDiv.innerHTML = "<b>Contact number: </b>" + partner.contact_number;
+  evacAreaDiv.innerHTML = "<b>Nearest evacuation area: </b>" + partner.nearest_evac_area;
+  riskDiv.innerHTML = "<h3>Risks:</h3>";
+  riskDiv.innerHTML += "<p><b>Earthquake: </b>" + partner.risk_level_earthquake;
+  riskDiv.innerHTML += "<p><b>Fire: </b>" + partner.risk_level_fire;
+  riskDiv.innerHTML += "<p><b>Flood: </b>" + partner.risk_level_flood;
+  riskDiv.innerHTML += "<p><b>Landslide: </b>" + partner.risk_level_landslide;
+  riskDiv.innerHTML += "<p><b>Storm: </b>" + partner.risk_level_storm;
+
+  residentsDiv.innerHTML = "<h3>Residents:</h3>";
+  residentsDiv.innerHTML += "<div><b>Residency status: </b>" + partner.residency_status + "</div>";
+  houseMaterialDiv.innerHTML = "<div><b>House material: </b> " + partner.house_material + "</div>";
+  isHOANOADiv.innerHTML = "<div><b>Parte ng HOA/NOA: </b>" + partner.is_hoa_noa + "</div>";
+  residentsDiv.innerHTML += "<div><b>Number of residents: </b>" + partner.num_residents + 
+    "<ul>" 
+    + "<li><b>Minors: </b>" + partner.num_residents_minor + "</li>"
+    + "<li><b>Seniors: </b>" + partner.num_residents_senior + "</li>"
+    + "<li><b>PWD: </b>" + partner.num_residents_pwd + "</li>"
+    + "<li><b>Sick: </b>" + partner.num_residents_sick
+    + "</li><li><b>Pregnant: </b>" + partner.num_residents_preg + "</li>"
+    + "</ul></div>";
+  
   // Append the div elements to the modal content
   modalContent.appendChild(nameDiv);
   modalContent.appendChild(addressDiv);
-  modalContent.appendChild(contactPersonDiv);
-  modalContent.appendChild(activityDiv);
-  modalContent.appendChild(admuContactDiv);
-  modalContent.appendChild(admuEmailDiv);
-  modalContent.appendChild(admuOfficeDiv);
-  modalContent.appendChild(orgDiv);
-  modalContent.appendChild(datesDiv);
+  modalContent.appendChild(contactNumberDiv);
+  modalContent.appendChild(evacAreaDiv);
+  modalContent.appendChild(riskDiv);
+  modalContent.appendChild(residentsDiv);
+  modalContent.appendChild(houseMaterialDiv);
+  modalContent.appendChild(isHOANOADiv);
 
   // Show the modal
   modal.style.display = "block";
@@ -199,66 +201,14 @@ function showModal(partner) {
   });
 }
 
-export function addLocation(
-  name,
-  activity,
-  admuContact,
-  admuEmail,
-  admuOffice,
-  org,
-  partnerContact,
-  dates,
-  latitude,
-  longitude
-) {
-  addDoc(colRef, {
-    name: name,
-    activity: activity,
-    "`admu-contact`": admuContact,
-    "`admu-email`": admuEmail,
-    "`admu-office`": admuOffice,
-    org: org,
-    "`partner-contact`": partnerContact,
-    dates: dates,
-    Latitude: latitude,
-    Longitude: longitude,
-  })
+export function addEntry(data){
+  data.forEach( (entry) => {
+    addDoc(colRef, entry)
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
-}
-
-export function editLocation(
-  docId,
-  name,
-  activity,
-  admuContact,
-  admuEmail,
-  admuOffice,
-  org,
-  partnerContact,
-  dates
-) {
-  const docReference = doc(db, "partners-2", docId);
-  const updateData = {
-    name: name,
-    activity: activity,
-    "`admu-contact`": admuContact,
-    "`admu-email`": admuEmail,
-    "`admu-office`": admuOffice,
-    org: org,
-    "`partner-contact`": partnerContact,
-    dates: dates,
-  };
-  return updateDoc(docReference, updateData)
-    .then(() => {
-      console.log("Document updated successfully");
-      alert("Document updated successfully");
-    })
-    .catch((error) => {
-      console.error("Error updating document: ", error);
-    });
+  })   
 }
