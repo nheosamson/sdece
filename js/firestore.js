@@ -99,9 +99,9 @@ getDocs(colRef)
       });
 
       // Adding classes and setting text content
-      nameDiv.classList.add("name");
-      addressDiv.classList.add("address");
-      activityDiv.classList.add("activity");
+      nameDiv.classList.add("name", "font-montserrat", "font-bold", "text-lg", "text-darkbg");
+      addressDiv.classList.add("address", "text-sm", "text-customGray", "mt-2", "font-hind", "font-regular");
+      activityDiv.classList.add("activity", "text-sm", "mt-2", "text-customBlack", "font-hind", "font-regular");
 
       nameDiv.textContent = partner.partnerName;
       addressDiv.textContent = partner.partnerAddress;
@@ -115,7 +115,9 @@ getDocs(colRef)
       }
       
 
-      listItem.classList.add("accordion");
+      listItem.classList.add("accordion", "py-6", "px-8", 
+        "border-b", "border-customGray"
+      );
       anchor.classList.add("accordion", "link");
 
       // Append elements to the DOM
