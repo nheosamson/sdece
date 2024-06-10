@@ -16,6 +16,8 @@ import {
     getFirestore,
     collection,
   } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
+
+console.log("UNIVERSAL JS LOADING ");
   
 export const firebaseConfig = {
     apiKey: "AIzaSyAeo2wTJFotROMNPa4UHXo2MqPaW8k07us",
@@ -31,23 +33,29 @@ export const firebaseConfig = {
 initializeApp(firebaseConfig);
 export const DB = getFirestore();
 
-var col_ref; // collrection reference
+var col_ref = null; // collrection reference
 
 export let partnersArray = [];
 
 const DB_RULES_AND_DATA = [
     // ["param1", "param2",...,"paramN",["key1", "key2",...,"keyN"]]
     ["partner-2", ["partner"]],
-    ["nstp", ["household_name"]],
+    ["nstp-3", ["household_name"]],
 
 ];
 
 export function setCollection(collection_name){
-    for( rule in DB_RULES_AND_DATA ){
+    console.log("collection name: " + collection_name);
+    
+    for( let rule of DB_RULES_AND_DATA ){
+        console.log("rule[0]: " + rule[0]);
         if (rule[0] === collection_name){
-            col_ref = collection_name;
+            console.log("IS EQUAL");
+            col_ref = collection( DB, collection_name );
         }
     }
+
+    console.log(col_ref);
 }
 
 export function getCollection(){
@@ -59,7 +67,7 @@ export function getDocIdByPartnerName(partnerName) {
     const endName = partnerName.replace(/\s/g, "\uf8ff");
 
     //rule loop
-    for (rule in DB_RULES_AND_DATA){
+    for ( let rule in DB_RULES_AND_DATA){
         if (col_ref.id === rule[0]){
             return getDocs(
                 query(
@@ -91,7 +99,7 @@ export function getDocByID(docId) {
 
     console.log("GET_DOC_ID");
 
-    for (rule in DB_RULES_AND_DATA){
+    for (let rule in DB_RULES_AND_DATA){
         console.log(COLREF.id)
         if (col_ref.id === rule[0]){
             const docReference = doc(DB, rule[0], docId);

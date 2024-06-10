@@ -1,5 +1,5 @@
 import { getPartnersArray, addEntry } from "./firestore.js";
-import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "../firestore_UNIV.js";
+import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
 import {
   getFirestore,
   collection,
@@ -11,6 +11,8 @@ setCollection("nstp-3");
 var colRef = getCollection();
 
 var map = L.map("map").setView([14.673, 121.11215], 21);
+
+console.log(colRef);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
