@@ -3,23 +3,43 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/login.css">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>Login</title>
+
+  <!-- Import Montserrat and Hind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link href="./src/output.css" rel="stylesheet">
+  <script type="module" src="js/firestore.js"></script>
 </head>
 
 <body>
-  <div class="header">
-    <img src="img/logo-osci.png" alt="OSCI Logo" class="img">
-    <h2>Office for Social Concern and Involvement</h2>
+
+  <div class="header h-full bg-darkbg">
+    <div class="ml-4 flex flex-row items-center font-bold">
+      <img class="size-8" src="img/logo-osci.png" alt="OSCI Logo" class="img">
+      <h2 class="justify-end items-center text-white text-lg font-montserrat p-8">Office for Social Concern and Involvement</h2>
+    </div>
   </div>
+
+  <div class="w-full h-screen flex justify-center items-center">
+    <form class="space-y-4">
+      <div class="bg-white px-2 rounded border border-gray-300">
+        <input type="email" class="email" id="email" placeholder="Enter Email" required>
+      </div>
+      <div class="bg-white px-2 rounded border border-gray-300">
+        <input type="password" class="password" id="password" placeholder="Password" required>
+      </div>
+      <button class="login-btn bg-lightbg text-white px-4 py-2 rounded border border-blue-500" id="loginButton">Login</button>
+      <p id="error"></p>
+    </form>
   </div>
-  <form>
-    <input type="email" class="email" id="email" placeholder="Enter Email" required>
-    <input type="password" class="password" id="password" placeholder="Password" required>
-    <div type="button" class="login-btn" id="loginButton">Login</div>
-    <p id="error"></p>
-  </form>
+
   <script type="module">
     import { signIn } from "./js/auth.js";
     // Add event listener to the button to call signIn function
@@ -29,6 +49,7 @@
       signIn(email, password);
     });
   </script>
+  
 </body>
 
 </html>
