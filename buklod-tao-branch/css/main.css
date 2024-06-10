@@ -9,7 +9,7 @@ body {
 }
 
 .map-container {
-  flex: 1;
+  flex: 0 0 20%;
   display: flex;
 }
 
@@ -34,15 +34,16 @@ body {
   align-items: center;
 }
 
-#search-bar {
+.search-bar {
   height: 40px;
   padding: 8px 32px;
-  margin: 12px;
   width: 100%;
   box-sizing: border-box;
   border-radius: 12px;
   border: transparent;
-  background-color: #f6f6f6;
+  background-color: #e4e4e4;
+  font-family: 'Hind';
+  font-size: 22px;
 }
 
 .logo-container {
@@ -95,13 +96,34 @@ li {
   color: #387181; /* Calypso */
 }
 
+.logout {
+  display: flex;
+  padding: 10px 10px;
+  z-index: 1;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.button-logout {
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 600;
+  color: red;
+  padding: 10px 60px;
+  border-color: red;
+}
+
 button.container {
   display: flex;
-  padding: 12px 16px;
   align-items: center;
   gap: 8px;
   align-self: stretch;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 0;
 }
 
@@ -125,7 +147,7 @@ div.buttons {
   align-items: flex-start;
   gap: 18px;
   align-self: stretch;
-  border-bottom: 1px solid #cbd5e0;
+  border-bottom: 0px solid #cbd5e0;
 }
 
 .icon {
@@ -150,7 +172,6 @@ img.accordion {
 
 .entries {
   background-color: #fafafa;
-  margin-top: 24px;
   width: 100%;
 }
 
@@ -172,18 +193,18 @@ a.accordion {
   text-decoration: none;
 }
 
-.name {
+.name {                           /* Name of each entry in list [Partner Name] */
   text-decoration: none;
   color: #387181;
   font-family: Montserrat;
   font-size: 18px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 900;
   line-height: 110%;
   letter-spacing: 0.36px;
 }
 
-.address {
+.address {                        /* Address of each entry in list [Partner Address] */
   color: #a0a0a0;
   text-overflow: ellipsis;
   font-family: Hind;
@@ -222,18 +243,30 @@ h1.entries {
   left: 5%;
   width: 75%; /* Adjust the width of the modal as needed */
   height: 100%; /* Adjust the height of the modal as needed */
-  overflow: hidden;
 }
 
+.modal-header {
+  margin-left: 25%;
+  margin-top: 5%;
+  padding: 10px 24px;
+  width: 30%;
+  max-width: 600px;
+  background-color: #fcfcfc;
+}
+
+
 .modal-content {
-  background-color: #fafafa;
-  margin: 7.5% 22.5%;
+  margin-left: 25%;
   padding: 31px 24px;
   width: 30%;
   max-width: 600px;
   border-radius: 8px;
   background-color: #fcfcfc;
-  overflow: hidden;
+  font-family: Hind;
+  font-size: 16px;
+  font-style: normal;
+  height: calc(80% - 140px);
+  overflow-y: auto;
 }
 
 .modal-name {
@@ -241,7 +274,7 @@ h1.entries {
   font-family: Montserrat;
   font-size: 24px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 900;
   line-height: 110%;
   letter-spacing: 0.48px;
   margin-bottom: 24px;
@@ -250,7 +283,7 @@ h1.entries {
 .modal-address {
   color: #a0a0a0;
   font-family: Hind;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 120%;
