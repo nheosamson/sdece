@@ -243,6 +243,9 @@ h1.entries {
   left: 5%;
   width: 75%; /* Adjust the width of the modal as needed */
   height: 100%; /* Adjust the height of the modal as needed */
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .modal-header {
@@ -256,8 +259,9 @@ h1.entries {
 
 
 .modal-content {
+  margin-top: -10px;
   margin-left: 25%;
-  padding: 31px 24px;
+  padding: 24px 32px;
   width: 30%;
   max-width: 600px;
   border-radius: 8px;
@@ -283,12 +287,12 @@ h1.entries {
 .modal-address {
   color: #a0a0a0;
   font-family: Hind;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 120%;
   letter-spacing: 0.32px;
-  margin-bottom: 32px;
+  margin-bottom: -16px;
 }
 .close {
   color: #aaaaaa;
@@ -313,12 +317,12 @@ h1.entries {
   overflow: hidden;
   color: #387181;
   text-overflow: ellipsis;
-  font-family: Montserrat;
-  font-size: 14px;
+  font-family: Hind;
+  font-size: 18px;
   font-style: normal;
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  flex-shrink: 5;
   font-weight: 700;
 }
 
