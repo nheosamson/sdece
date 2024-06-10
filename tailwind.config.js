@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     fontFamily: {
       'montserrat': ['Montserrat', 'sans-serif'],
-      'hind': ['Hind', 'sans-serif']
+      'hind': ['Hind', 'sans-serif'],
+      'garamond': ['Garamond', 'serif']
     },
     extend: {
       colors: {
