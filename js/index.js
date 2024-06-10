@@ -29,9 +29,11 @@ async function searchLocation(loc) {
           parseFloat(entry["lat"]),
           parseFloat(entry["lon"]),
         ]);
+
+        // This is the popup for when the user clicks on a partner
         var popupContent = `
-        <div class="leaflet-popup-container">
-          <h2 class="partner-header bg-gray-50 ">${loc}</h2>          
+        <div class="leaflet-popup-container bg-darkbg">
+          <h2 class="partner-header">${loc}</h2>          
           <div class="partner-contact">
           </div>
           <div class="leaflet-buttons">
@@ -55,10 +57,13 @@ async function searchLocation(loc) {
           for (var i = 0; i < editButtons.length; i++) {
             editButtons[i].addEventListener("click", function () {
               var partnerName = this.getAttribute("data-loc");
+              
+              // TODO: Modify to show in block instead of a new window!
               window.open(
                 `editloc.html?partnerName=${encodeURIComponent(partnerName)}`,
                 "_blank"
               );
+
             });
           }
         });
@@ -82,6 +87,7 @@ function onMapClick(e) {
   const lat = e.latlng.lat;
   const lng = e.latlng.lng;
 
+  // This is the popup for when the user clicks on a spot on the map
   var popupContent = `
       <div class="partner-geolocation">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -90,7 +96,7 @@ function onMapClick(e) {
             ${lat} + ${lng}
             <br>
         </div>
-    <button class="addButton" data-lat="${lat}" data-lng="${lng}">Add Location</button>
+    <button class="addButton p-5" data-lat="${lat}" data-lng="${lng}">Add Location</button>
   `;
 
   popup.setLatLng(e.latlng).setContent(popupContent).openOn(map);
