@@ -1,12 +1,14 @@
-import { getDocIdByPartnerName, getDocByID, getPartnersArray, addEntry } from "./firestore.js";
+import { getPartnersArray, addEntry } from "./firestore.js";
+import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "../firestore_UNIV.js";
 import {
   getFirestore,
   collection,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
 
-const db = getFirestore();
-const colRef = collection(db, "nstp-3");
+// const db = getFirestore();
+setCollection("nstp-3");
+var colRef = getCollection();
 
 var map = L.map("map").setView([14.673, 121.11215], 21);
 
@@ -68,6 +70,7 @@ searchControl.on("results", function (data) {
 });
 
 function onMapClick(e) {
+  console.log("MAP CLICK");
   const lat = e.latlng.lat;
   const lng = e.latlng.lng;
 
@@ -102,6 +105,7 @@ function onMapClick(e) {
 map.panTo(new L.LatLng(14.652538, 121.077818));
 
 function panLocation(name) {
+  console.log("PANNNNNN");
   getDocIdByPartnerName(name).then((docId) => {
     getDocByID(docId).then((doc) => {
       searchLocation(doc);
@@ -114,6 +118,7 @@ document.getElementById("locationList").addEventListener("click", (event) => {
 });
 
 function getDetails(name) {
+  console.log("GETDEETS");
   getDocIdByPartnerName(name).then((docId) => {
     if (docId) {
       getDocByID(docId).then((doc) => {
