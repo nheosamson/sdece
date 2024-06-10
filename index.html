@@ -1,103 +1,101 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8" />
-  <title>Geocoding Control</title>
-  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <head>
+        <meta charset="utf-8" />
+        <title>Geocoding Control</title>
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 
-  <!-- Import Montserrat and Hind -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Load Leaflet from CDN -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
-
-  <!-- Load Esri Leaflet from CDN -->
-  <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
-    integrity="sha512-xY2smLIHKirD03vHKDJ2u4pqeHA7OQZZ27EjtqmuhDguxiUvdsOuXMwkg16PQrm9cgTmXtoxA6kwr8KBy3cdcw=="
-    crossorigin=""></script>
-
-  <!-- Load Esri Leaflet Geocoder from CDN -->
-  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
-    integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
-    crossorigin="">
-  <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
-    integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
-    crossorigin=""></script>
-
-  <link href="./src/output.css" rel="stylesheet">
-  <script type="module" src="js/firestore.js"></script>
-</head>
-
-<body>
-  
-  <div id="partnerModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p id="modalContent"></p>
-    </div>
-  </div>
-
-  <div class="main">
-
-    <div class="sidenav bg-gray-50 w-96">
-
-      <!-- This is the container that pads the Search bar -->
-      <div class="p-3 bg-white w-full">
-
-        <!-- Contains input and icon group -->
-        <div class="bg-customMediumGray px-8 py-5 rounded-2xl text-2xl flex flex-row">
-
-          <input onkeyup="helpMe()" type="text" id="search-input" placeholder="Search..." class="bg-customMediumGray focus:outline-none focus:ring-0 w-full font-hind">
-
-          <!-- Icons -->
-          <div class="flex flex-row justify-end items-center ">
-              <button>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"  class="size-8 stroke-customDarkGray mr-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                </svg>
-              </button>
-              <button>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"  class=" size-8 stroke-customDarkGray">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              </button>
-          </div>
-
-        </div>
+        <!-- Import Montserrat and Hind from Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         
+        <!-- Load Leaflet from CDN -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+            integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+            crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+        
+        <!-- Load Esri Leaflet from CDN -->
+        <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
+            integrity="sha512-xY2smLIHKirD03vHKDJ2u4pqeHA7OQZZ27EjtqmuhDguxiUvdsOuXMwkg16PQrm9cgTmXtoxA6kwr8KBy3cdcw=="
+            crossorigin=""></script>
+        
+        <!-- Load Esri Leaflet Geocoder from CDN -->
+        <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
+            integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+            crossorigin="">
+        <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
+            integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
+            crossorigin=""></script>
+        <link href="./src/output.css" rel="stylesheet">
+        <script type="module" src="js/firestore.js"></script>
+    </head>
+    
+    <body>
 
-      </div>
+        <!-- <div id="partnerModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+            </div>
+        </div> -->
 
-      <button class="text-xl flex flex-row items-center px-8 py-4 bg-customLightGray w-full text-lightbg my-6 hover:text-darkbg">
-        <div>+</div>
-        <p class="ml-4 font-bold font-montserrat ">Add a new partner</p>
-      </button>
-      
-      <div class="entries bg-customLightGray">
-        <ul id="locationList" class="accordion ">
-        </ul>
-      </div>
+        <div class="main w-full h-screen overflow-hidden">
+            <div class="sidenav bg-gray-50 w-96 overflow-scroll">
+                <div class="p-3 bg-white w-full">
+                    <div class="bg-customMediumGray px-8 py-5 rounded-2xl text-2xl flex flex-row">
+                        <input onkeyup="helpMe()" type="text" id="search-input" placeholder="Search..." class="bg-customMediumGray focus:outline-none focus:ring-0 w-full font-hind">
+                        <div class="flex flex-row justify-end items-center ">
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="size-8 stroke-customDarkGray mr-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                            </button>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class=" size-8 stroke-customDarkGray">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button class="text-xl flex flex-row items-center px-8 py-4 bg-customLightGray w-full text-lightbg my-6 hover:text-darkbg">
+                    <div>+</div>
+                    <p class="ml-4 font-bold font-montserrat ">Add a new partner</p>
+                </button>
+                <div class="entries bg-customLightGray">
+                    <ul id="locationList" class="accordion ">
+                    </ul>
+                </div>
+            </div>
 
-    </div>
+            <!-- Right container containing Login/Logout header and map -->
+            <div class="right-container w-full h-full flex-1 bg-cyan-50">   
+                             
+                <div class="bg-darkbg h-auto p-5 flex flex-row justify-end items-center">
+                    <button class="py-3 px-6 mr-4 bg-lightbg font-montserrat font-bold text-xl rounded flex flex-row text-white justify-center items-center">
 
-    <div class="map-container">
-      <div id="map">
-      </div>
-    </div>
-  </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                        </svg>
 
-  <script type="module" src="js/index.js"></script>
-</body>
 
+                        Logout
+                    </button>
+                </div>
+                <div class="map-container h-full">
+                    <div id="map">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script type="module" src="js/index.js"></script>
+    </body>
 </html>
