@@ -26,4 +26,4 @@
   height: 100%;
 }
 
-
+/* npx tailwindcss -i ./css/main.css -o ./src/output.css --watch */
