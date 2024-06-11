@@ -67,11 +67,11 @@ export function getDocIdByPartnerName(partnerName) {
     const endName = partnerName.replace(/\s/g, "\uf8ff");
 
     //rule loop
-    for ( let rule in DB_RULES_AND_DATA){
+    for ( let rule of DB_RULES_AND_DATA){
         if (col_ref.id === rule[0]){
             return getDocs(
                 query(
-                    COLREF,
+                    col_ref,
                     where(rule[1][0], ">=", partnerName), // let's wait for Luigi's standardization. IF_ELSE nalang muna 
                     where(rule[1][0], "<=", partnerName + endName)
                 )
@@ -99,8 +99,8 @@ export function getDocByID(docId) {
 
     console.log("GET_DOC_ID");
 
-    for (let rule in DB_RULES_AND_DATA){
-        console.log(COLREF.id)
+    for (let rule of DB_RULES_AND_DATA){
+        console.log(col_ref.id)
         if (col_ref.id === rule[0]){
             const docReference = doc(DB, rule[0], docId);
             let docObj = {};

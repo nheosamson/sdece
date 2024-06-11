@@ -48,7 +48,7 @@ getDocs(colRef)
   });
 
 function searchLocation(doc) {
-  
+  console.log("Search location of "+ doc.id);
   let popup = L.popup()
     .setLatLng([doc.latitude + 0.00015, doc.longitude] )
     .setContent(`
@@ -107,7 +107,7 @@ function onMapClick(e) {
 map.panTo(new L.LatLng(14.652538, 121.077818));
 
 function panLocation(name) {
-  console.log("PANNNNNN");
+  console.log("PANNNNNN to "+name);
   getDocIdByPartnerName(name).then((docId) => {
     getDocByID(docId).then((doc) => {
       searchLocation(doc);
