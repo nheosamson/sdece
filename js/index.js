@@ -1,6 +1,9 @@
+//import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
 import { getDocIdByPartnerName, getDocByID } from "./firestore.js";
 
 var map = L.map("map").setView([14.651, 121.052], 13);
+//setCollection("partner-2");
+//var colRef = getCollection();
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
@@ -12,7 +15,8 @@ var searchControl = L.esri.Geocoding.geosearch().addTo(map);
 var results = L.layerGroup().addTo(map);
 var popup = L.popup();
 
-async function searchLocation(loc) {
+// This puts a search term into a website and waits for the answer
+async function searchOnMap(loc) {
   var parsed_loc = encodeURIComponent(
     loc.toLowerCase().replace(/[^a-z0-9 _-]+/gi, "-")
   );
@@ -69,6 +73,30 @@ async function searchLocation(loc) {
     });
 }
 
+function searchLocation(doc) {// just add a marker at this location
+  console.log("adding markers in "+doc.partnerName+" at "+ 
+    "lat: "+ doc.location.latitude +
+    "long: "+ doc.location.longitude);
+  var marker = L.marker([
+    parseFloat(doc.location.latitude),
+    parseFloat(doc.location.longitude),
+  ]);
+
+  results.addLayer(marker);
+  // console.log("Search location of "+ doc.id);
+  // let popup = L.popup()
+  //   .setLatLng([doc.latitude + 0.00015, doc.longitude] )
+  //   .setContent(`
+  //   <div class="leaflet-popup-container">
+  //   <h2 class="partner-header">${doc.household_name}</h2>          
+  //   <div class="partner-contact">${doc.address} ${doc.phase}</div>
+  //   `)
+  //   .openOn(map);
+
+  
+  // map.panTo(new L.LatLng(doc.latitude, doc.longitude));
+}
+
 searchControl.on("results", function (data) {
   results.clearLayers();
   for (var i = data.results.length - 1; i >= 0; i--) {
@@ -119,7 +147,7 @@ function panLocation(name) {
       console.log(`Panning to ${doc.location.latitude}, ${doc.location.longitude}`);
       map.panTo(new L.LatLng(doc.location.latitude, doc.location.longitude));
       console.log(`Searching for ${doc.partnerName}`);
-      searchLocation(doc.partnerName);
+      searchLocation(doc);
     });
   });
 }

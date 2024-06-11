@@ -39,7 +39,7 @@ export let partnersArray = [];
 
 const DB_RULES_AND_DATA = [
     // ["param1", "param2",...,"paramN",["key1", "key2",...,"keyN"]]
-    ["partner-2", ["partner"]],
+    ["partner-2", ["partnerName"]],
     ["nstp-3", ["household_name"]],
 
 ];
@@ -63,11 +63,11 @@ export function getCollection(){
 }
 
 export function getDocIdByPartnerName(partnerName) {
-    console.log("GET_DOC_ID_BY_PARTNER_NAME");
+    console.log("GET_DOC_ID_BY_PARTNER_NAME " + partnerName + " in " + col_ref.id);
     const endName = partnerName.replace(/\s/g, "\uf8ff");
 
     //rule loop
-    for ( let rule of DB_RULES_AND_DATA){
+    for ( let rule of DB_RULES_AND_DATA ){
         if (col_ref.id === rule[0]){
             return getDocs(
                 query(
