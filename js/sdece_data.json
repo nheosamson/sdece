@@ -1,5 +1,4 @@
-{
-    "sdece-01": [
+[
       {
         "location_latitude": 14.6974821533851,
         "location_longitude": 121.10988628152,
@@ -253,4 +252,3 @@
         "ateneo_contact_email": "osa.ls@ateneo.edu"
       }
     ]
-  }
