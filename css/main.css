@@ -19,3 +19,35 @@
 	width: 100%;
 	height: 100%;
 }
+
+.leaflet-popup-container {
+	background-color: white;
+}
+
+.popup-accordion {
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	text-align: left;
+	border: none;
+	outline: none;
+	transition: 0.4s;
+}
+
+.popup-accordion:hover {
+	background-color: rgb(61 151 175);
+	color: white;
+}
+
+.active {
+	color: rgb(61 151 175);
+	font-weight: bold;
+}
+
+.popup-accordion-content {
+	padding: 0 18px;
+	max-height: 200px;
+	background-color: white;
+	display: none;
+	overflow: scroll;
+}
