@@ -1,5 +1,6 @@
 import { getPartnersArray, addEntry } from "./firestore.js";
-import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
+import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB_RULES_AND_DATA } from "/firestore_UNIV.js";
+// import { getDetails } from "/index_UNIV.js";
 import {
   getFirestore,
   collection,
@@ -29,18 +30,14 @@ getDocs(colRef)
   .then((querySnapshot) => {
     querySnapshot.forEach((entry) => {
       var doc = entry.data();
-      //console.log(doc);
       var marker = L.marker([
         parseFloat(doc.latitude),
         parseFloat(doc.longitude),
       ]);
-      var popupContent = `
-      <div class="leaflet-popup-container">
-      <h2 class="partner-header">${doc.household_name}</h2>          
-      <div class="partner-contact">${doc.address} ${doc.phase}</div>
-        `;
-      marker.bindPopup(popupContent);
-      results.addLayer(marker);
+      getDivContent(doc.household_name).then((div) =>{
+        marker.bindPopup(div);
+        results.addLayer(marker);
+      });
     });
   })
   .catch((error) => {
@@ -51,11 +48,10 @@ function searchLocation(doc) {
   console.log("Search location of "+ doc.id);
   let popup = L.popup()
     .setLatLng([doc.latitude + 0.00015, doc.longitude] )
-    .setContent(`
-    <div class="leaflet-popup-container">
-    <h2 class="partner-header">${doc.household_name}</h2>          
-    <div class="partner-contact">${doc.address} ${doc.phase}</div>
-    `)
+    // can use rule engine for this.
+    .setContent(
+      getDetails(doc.household_name)
+    )
     .openOn(map);
 
   
@@ -112,60 +108,37 @@ function panLocation(name) {
     getDocByID(docId).then((doc) => {
       searchLocation(doc);
     });
-  });
+  });     
 }
 
 document.getElementById("locationList").addEventListener("click", (event) => {
   panLocation(event.target.innerHTML);
 });
 
-function getDetails(name) {
-  console.log("GETDEETS");
-  getDocIdByPartnerName(name).then((docId) => {
+// Takes in a name to determine all field values which should be displayed 
+// Current Issue: it doesn't display all the added things, could be due to the async nature of these functions
+function getDivContent(name) {
+  let div_content = ``; // This isn't affected, this is the one getting printed
+  return getDocIdByPartnerName(name).then((docId) => {
     if (docId) {
-      getDocByID(docId).then((doc) => {
+      // console.log("is this seen")
+      return getDocByID(docId).then((doc) => {
         // Insert the partner details into the div with class "partner-contact"
-        const partnerContactDiv = document.querySelector(".partner-contact");
-        if (partnerContactDiv) {  
-            partnerContactDiv.innerHTML += `
-            <div class="partner-info">
-            <p class="partner-label">Nearest Evacuation Area</p>
-              <p class="partner-activity"> ${doc.nearest_evac_area}</p>
-            </div>
-
-            <div class="partner-info">
-              <p class="partner-label">Contact Person</p>
-              <p class="partner-value">${activity.ateneoContactPerson}</p>
-            </div>
-
-            <div class="partner-info">
-              <p class="partner-label">Organization / Unit</p>
-              <p class="partner-value"> ${activity.ateneoOrganization}</p>
-            </div>
-            
-
-            <div class="partner-info">
-              <p class="partner-label">Date/s of Partnership</p>
-              <p class="partner-value"> ${activity.activityDate.toDate()}</p>   <!-- find a way to format this into just Date -->
-            </div>
-
-              <hr>
-              <h2>Ateneo Office Oversight</h2> 
-
-            <div class="partner-info">          
-              <p class="partner-label">${activity.ateneoOverseeingOffice}</p>
-              <p class="partner-value"> ${activity.ateneoContactEmail}</p>
-              <p class="partner-value"> ${activity.ateneoOverseeingOfficeEmail}</p>
-              </div>
-            
-            `;
-          
-        } else {
-          console.log("Div with class 'partner-contact' not found.");
+        for(let rule of DB_RULES_AND_DATA){
+          if(getCollection().id === rule[0]){
+            div_content += `<div class="partner-contact"> <div class="partner-label"> partner-label </div>`;
+            for(let index in rule[1]){   
+              div_content += `<div class="partner-activity> ${doc.household_name} </div>`;   
+            }
+            div_content += `</div>`;
+            return div_content;
+          }
         }
       });
-    } else {
-      console.log("No matching partner found.");
+    } else{
+        console.log("No matching partner found.");
+        div_content = "no partner";
+      return div_content;
     }
   });
 }

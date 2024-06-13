@@ -37,11 +37,10 @@ var col_ref = null; // collrection reference
 
 export let partnersArray = [];
 
-const DB_RULES_AND_DATA = [
+export const DB_RULES_AND_DATA = [
     // ["param1", "param2",...,"paramN",["key1", "key2",...,"keyN"]]
     ["partner-2", ["partner"]],
     ["nstp-3", ["household_name"]],
-
 ];
 
 export function setCollection(collection_name){
@@ -63,7 +62,6 @@ export function getCollection(){
 }
 
 export function getDocIdByPartnerName(partnerName) {
-    console.log("GET_DOC_ID_BY_PARTNER_NAME");
     const endName = partnerName.replace(/\s/g, "\uf8ff");
 
     //rule loop
@@ -77,7 +75,6 @@ export function getDocIdByPartnerName(partnerName) {
                 )
             )
             .then((querySnapshot) => {
-                console.log(querySnapshot);
                 if (!querySnapshot.empty) {
                 // Assuming there is only one document with the given partner name
                 const doc = querySnapshot.docs[0];
@@ -96,11 +93,7 @@ export function getDocIdByPartnerName(partnerName) {
 }
 
 export function getDocByID(docId) {
-
-    console.log("GET_DOC_ID");
-
     for (let rule of DB_RULES_AND_DATA){
-        console.log(col_ref.id)
         if (col_ref.id === rule[0]){
             const docReference = doc(DB, rule[0], docId);
             let docObj = {};
