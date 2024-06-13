@@ -62,17 +62,29 @@ async function searchLocation(loc) {
           // Edit Location form
           var editButtons = document.getElementsByClassName("editButton");
           for (var i = 0; i < editButtons.length; i++) {
-            editButtons[i].addEventListener("click", function () {
-              var partnerName = this.getAttribute("data-loc");
-              
-              // TODO: Modify to show in block instead of a new window!
-              window.open(
-                `editloc.html?partnerName=${encodeURIComponent(partnerName)}`,
-                "_blank"
-              );
+    editButtons[i].addEventListener("click", function () {
+        var partnerName = this.getAttribute("data-loc");
+        
+        // Select the modal and partnerName elements
+        var modal = document.getElementById("myModal");
+        var partnerNameElement = document.getElementById("partnerName");
+        
+        // Set the partner name in the modal
+        partnerNameElement.textContent = partnerName;
+        
+        // Display the modal
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        
+        // Close the modal when the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.add("hidden");
+            }
+        }
+    });
+}
 
-            });
-          }
 
           // Pop up toggle show/hide
           var acc = document.getElementsByClassName("popup-accordion");
