@@ -671,6 +671,10 @@ video {
   height: 100vh;
 }
 
+.h-9 {
+  height: 2.25rem;
+}
+
 .h-20 {
   height: 5rem;
 }
@@ -685,6 +689,10 @@ video {
 
 .w-96 {
   width: 24rem;
+}
+
+.w-\[480px\] {
+  width: 480px;
 }
 
 .w-auto {
@@ -721,6 +729,10 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .overflow-scroll {
@@ -859,9 +871,19 @@ video {
   padding-bottom: 1.5rem;
 }
 
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.px-9 {
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+}
+
+.px-\[3px\] {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .text-center {
@@ -939,24 +961,24 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 /* Reset default margin and spacing */
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  line-height: auto;
 }
 
 .main {
   display: flex;
   flex-direction: row;
 }
-
-/* #map {
-	width: 100%;
-	height: 100%; 
-} */
 
 .leaflet-popup-container {
   background-color: white;
