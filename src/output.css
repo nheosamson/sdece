@@ -592,88 +592,24 @@ video {
   position: fixed;
 }
 
+.absolute {
+  position: absolute;
+}
+
 .inset-0 {
   inset: 0px;
 }
 
-.z-50 {
-  z-index: 50;
+.top-0 {
+  top: 0px;
 }
 
-.z-\[200000000\] {
-  z-index: 200000000;
-}
-
-.z-\[1001\] {
-  z-index: 1001;
-}
-
-.z-\[999\] {
-  z-index: 999;
-}
-
-.z-\[100\] {
-  z-index: 100;
-}
-
-.z-\[800\] {
-  z-index: 800;
-}
-
-.z-\[300\] {
-  z-index: 300;
-}
-
-.z-\[200\] {
-  z-index: 200;
-}
-
-.z-\[230\] {
-  z-index: 230;
-}
-
-.z-\[250\] {
-  z-index: 250;
-}
-
-.z-\[280\] {
-  z-index: 280;
-}
-
-.z-\[290\] {
-  z-index: 290;
-}
-
-.z-\[299\] {
-  z-index: 299;
-}
-
-.z-\[400\] {
-  z-index: 400;
-}
-
-.z-\[500\] {
-  z-index: 500;
-}
-
-.z-\[350\] {
-  z-index: 350;
-}
-
-.z-\[390\] {
-  z-index: 390;
-}
-
-.z-\[399\] {
-  z-index: 399;
+.left-0 {
+  left: 0px;
 }
 
 .z-\[2400\] {
   z-index: 2400;
-}
-
-.m-auto {
-  margin: auto;
 }
 
 .my-6 {
@@ -721,6 +657,18 @@ video {
   margin-top: 12rem;
 }
 
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-0 {
+  margin-top: 0px;
+}
+
+.mt-9 {
+  margin-top: 2.25rem;
+}
+
 .block {
   display: block;
 }
@@ -751,6 +699,10 @@ video {
   height: 5rem;
 }
 
+.h-\[300px\] {
+  height: 300px;
+}
+
 .h-auto {
   height: auto;
 }
@@ -761,6 +713,10 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-2\/3 {
+  height: 66.666667%;
 }
 
 .w-1\/2 {
@@ -779,6 +735,10 @@ video {
   width: 480px;
 }
 
+.w-\[700px\] {
+  width: 700px;
+}
+
 .w-auto {
   width: auto;
 }
@@ -787,12 +747,8 @@ video {
   width: 100%;
 }
 
-.w-screen {
-  width: 100vw;
-}
-
-.w-8 {
-  width: 2rem;
+.w-\[862px\] {
+  width: 862px;
 }
 
 .flex-1 {
@@ -835,6 +791,10 @@ video {
   overflow-y: hidden;
 }
 
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -845,6 +805,10 @@ video {
 
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
 }
 
 .border {
@@ -870,6 +834,11 @@ video {
   border-left-color: rgb(251 146 60 / var(--tw-border-opacity));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-customLightGray {
   --tw-bg-opacity: 1;
   background-color: rgb(252 252 252 / var(--tw-bg-opacity));
@@ -893,11 +862,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {

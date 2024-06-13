@@ -62,19 +62,20 @@ async function searchLocation(loc) {
           // Edit Location form
           var editButtons = document.getElementsByClassName("editButton");
           for (var i = 0; i < editButtons.length; i++) {
-    editButtons[i].addEventListener("click", function () {
-        var partnerName = this.getAttribute("data-loc");
-        
+    editButtons[i].addEventListener("click", function () {        
         // Select the modal and partnerName elements
-        var modal = document.getElementById("myModal");
-        var partnerNameElement = document.getElementById("partnerName");
-        
-        // Set the partner name in the modal
-        partnerNameElement.textContent = partnerName;
-        
+        var modal = document.getElementById("editModal");
+
+        // TODO: Integrate this functionality into the modal instead     
+        // var partnerName = this.getAttribute("data-loc");
+        //       window.open(
+        //         `editloc.html?partnerName=${encodeURIComponent(partnerName)}`,
+        //         "_blank"
+        //       );
+
         // Display the modal
         modal.classList.remove("hidden");
-        modal.classList.add("flex");
+        modal.classList.add("flex")
         
         // Close the modal when the user clicks anywhere outside of it
         window.onclick = function(event) {
@@ -145,12 +146,29 @@ function onMapClick(e) {
     const lat = this.getAttribute("data-lat");
     const lng = this.getAttribute("data-lng");
 
-    window.open(
-      `addloc.html?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(
-        lng
-      )}`,
-      "_blank"
-    );
+
+
+    var modal = document.getElementById("addModal");
+
+        // TODO: Integrate this functionality into the modal instead     
+        // var partnerName = this.getAttribute("data-loc");
+          // window.open(
+          //   `addloc.html?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(
+          //     lng
+          //   )}`,
+          //   "_blank"
+          // );
+
+        // Display the modal
+        modal.classList.remove("hidden");
+        modal.classList.add("flex")
+        
+        // Close the modal when the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.add("hidden");
+            }
+        }
   });
 }
 
