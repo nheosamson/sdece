@@ -7,18 +7,12 @@
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
-	line-height: auto;
 }
 
 .main {
 	display: flex;
 	flex-direction: row;
 }
-
-/* #map {
-	width: 100%;
-	height: 100%; 
-} */
 
 .leaflet-popup-container {
 	background-color: white;

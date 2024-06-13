@@ -7,6 +7,7 @@ module.exports = {
       'garamond': ['Garamond', 'serif']
     },
     extend: {
+      // Will update this to reflect colors used on Figma
       colors: {
         darkbg: '#387181',
         lightbg: '#3D97AF',
