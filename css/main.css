@@ -15,33 +15,60 @@
 }
 
 .leaflet-popup-container {
+	font-weight: bold;
 	background-color: white;
 }
 
+.leaflet-popup-tip {
+	display: none;
+}
+
+.leaflet-popup-content-wrapper{
+	border-left: 8px solid #91C9DB;
+	border-radius: 2%;
+	padding: 2%;
+	width: fit-content;
+}
+
+/*
+.leaflet-popup-content-wrapper:hover, .popup-accordion:not(.active) {
+	background-color: #91C9DB;
+}
+*/
+
 .popup-accordion {
 	cursor: pointer;
-	padding: 18px;
 	width: 100%;
 	text-align: left;
+	font-size: small;
 	border: none;
 	outline: none;
 	transition: 0.4s;
+	color:black;
+	display: flex;
+	align-items: center;
 }
 
-.popup-accordion:hover {
-	background-color: rgb(61 151 175);
-	color: white;
+.popup-accordion.active {
+	color: #91C9DB;
 }
 
-.active {
-	color: rgb(61 151 175);
-	font-weight: bold;
+.popup-accordion.active + .leaflet-popup-content-wrapper{
+	background-color: white;
 }
 
 .popup-accordion-content {
 	padding: 0 18px;
-	max-height: 200px;
-	background-color: white;
+	max-height: max-content;
 	display: none;
-	overflow: scroll;
+	overflow: visible;
+	color:black;
+}
+
+.partner-info {
+	line-height: 0.6;
+}
+
+.partner-label {
+	font-weight: bold;
 }

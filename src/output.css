@@ -592,20 +592,8 @@ video {
   position: fixed;
 }
 
-.absolute {
-  position: absolute;
-}
-
 .inset-0 {
   inset: 0px;
-}
-
-.top-0 {
-  top: 0px;
-}
-
-.left-0 {
-  left: 0px;
 }
 
 .z-\[2400\] {
@@ -615,6 +603,10 @@ video {
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .mb-6 {
@@ -657,14 +649,6 @@ video {
   margin-top: 12rem;
 }
 
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
-.mt-0 {
-  margin-top: 0px;
-}
-
 .mt-9 {
   margin-top: 2.25rem;
 }
@@ -695,12 +679,12 @@ video {
   height: 2rem;
 }
 
-.h-20 {
-  height: 5rem;
+.h-2\/3 {
+  height: 66.666667%;
 }
 
-.h-\[300px\] {
-  height: 300px;
+.h-20 {
+  height: 5rem;
 }
 
 .h-auto {
@@ -715,16 +699,16 @@ video {
   height: 100vh;
 }
 
-.h-2\/3 {
-  height: 66.666667%;
-}
-
 .w-1\/2 {
   width: 50%;
 }
 
 .w-14 {
   width: 3.5rem;
+}
+
+.w-8 {
+  width: 2rem;
 }
 
 .w-96 {
@@ -735,8 +719,8 @@ video {
   width: 480px;
 }
 
-.w-\[700px\] {
-  width: 700px;
+.w-\[862px\] {
+  width: 862px;
 }
 
 .w-auto {
@@ -745,10 +729,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[862px\] {
-  width: 862px;
 }
 
 .flex-1 {
@@ -807,10 +787,6 @@ video {
   border-radius: 0.5rem;
 }
 
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-
 .border {
   border-width: 1px;
 }
@@ -827,11 +803,6 @@ video {
 .border-red-700 {
   --tw-border-opacity: 1;
   border-color: rgb(185 28 28 / var(--tw-border-opacity));
-}
-
-.border-l-orange-400 {
-  --tw-border-opacity: 1;
-  border-left-color: rgb(251 146 60 / var(--tw-border-opacity));
 }
 
 .bg-black {
@@ -1000,6 +971,11 @@ video {
   color: rgb(61 151 175 / var(--tw-text-opacity));
 }
 
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
@@ -1030,35 +1006,64 @@ video {
 }
 
 .leaflet-popup-container {
+  font-weight: bold;
   background-color: white;
 }
 
+.leaflet-popup-tip {
+  display: none;
+}
+
+.leaflet-popup-content-wrapper{
+  border-left: 8px solid #91C9DB;
+  border-radius: 2%;
+  padding: 2%;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+/*
+.leaflet-popup-content-wrapper:hover, .popup-accordion:not(.active) {
+	background-color: #91C9DB;
+}
+*/
+
 .popup-accordion {
   cursor: pointer;
-  padding: 18px;
   width: 100%;
   text-align: left;
+  font-size: small;
   border: none;
   outline: none;
   transition: 0.4s;
+  color:black;
+  display: flex;
+  align-items: center;
 }
 
-.popup-accordion:hover {
-  background-color: rgb(61 151 175);
-  color: white;
+.popup-accordion.active {
+  color: #91C9DB;
 }
 
-.active {
-  color: rgb(61 151 175);
-  font-weight: bold;
+.popup-accordion.active + .leaflet-popup-content-wrapper{
+  background-color: white;
 }
 
 .popup-accordion-content {
   padding: 0 18px;
-  max-height: 200px;
-  background-color: white;
+  max-height: -moz-max-content;
+  max-height: max-content;
   display: none;
-  overflow: scroll;
+  overflow: visible;
+  color:black;
+}
+
+.partner-info {
+  line-height: 0.6;
+}
+
+.partner-label {
+  font-weight: bold;
 }
 
 .hover\:bg-darkbg:hover {
