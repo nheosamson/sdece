@@ -99,9 +99,9 @@ getDocs(colRef)
       });
 
       // Adding classes and setting text content
-      nameDiv.classList.add("name", "font-montserrat", "font-bold", "text-lg", "text-darkbg");
-      addressDiv.classList.add("address", "text-sm", "text-customGray", "mt-2", "font-hind", "font-regular");
-      activityDiv.classList.add("activity", "text-sm", "mt-2", "text-customBlack", "font-hind", "font-regular");
+      nameDiv.classList.add("name", "font-montserrat", "font-bold", "text-lg", "text-darkbg", "leading-[110%]");
+      addressDiv.classList.add("address", "text-sm", "text-customGray", "font-hind", "font-regular", "leading-[120%]", "mt-2");
+      activityDiv.classList.add("activity", "text-sm", "text-customBlack", "font-hind", "font-regular","leading-[110%]", "mt-2");
 
       nameDiv.textContent = partner.partnerName;
       addressDiv.textContent = partner.partnerAddress;
