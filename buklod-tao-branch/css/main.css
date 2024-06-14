@@ -35,7 +35,7 @@ body {
   display: flex;
   position: absolute;
   width: 480px;
-  height: 729px;
+  height: 100%;
   background-color: #F6F6F6;
   flex-direction: column;
   align-items: flex-start;
@@ -55,10 +55,19 @@ body {
   width: 100%;
   box-sizing: border-box;
   border-radius: 12px;
-  border: transparent;
   background-color: #e4e4e4;
-  font-family: 'Hind';
-  font-size: 22px;
+  border: transparent;
+  background-position: calc(100% - 16px) center;
+  font-family: 'Montserrat';
+  font-size: 20px;
+  background-image: url("../img/search-icon.png");
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  justify-content: right;
+}
+
+.search-bar:focus {
+  background-image: none;
 }
 
 .logo-container {
@@ -150,22 +159,26 @@ button.container {
   align-items: center;
   gap: 8px;
   align-self: stretch;
-  border-radius: 10px;
   border: 0;
-  background-color: #F6F6F6;
+  background-color: #e4e4e4;
 }
 
 button.label-font {
   font-family: Montserrat;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-bottom: 30px;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  color: #568d9e;
+  color: #3D97AF;
+  letter-spacing: 0.8px;
+  background-color: #e4e4e4;
 }
 
 button:hover {
-  background-color: #003838;
+  background-color: #e4e4e4;
   cursor: pointer;
 }
 
@@ -177,6 +190,12 @@ div.buttons {
   gap: 18px;
   align-self: stretch;
   border-bottom: 0px solid #cbd5e0;
+}
+
+.search-button {
+  background-image: url("./img/search-icon.png");
+  background-repeat: no-repeat;
+  justify-content: right;
 }
 
 .icon {
@@ -236,6 +255,7 @@ a.accordion {
 
 .address {                        /* Address of each entry in list [Partner Address] */
   color: #a0a0a0;
+  margin-top: 10px;
   text-overflow: ellipsis;
   font-family: Hind;
   font-size: 14px;
@@ -323,7 +343,6 @@ h1.entries {
   width: 100%;
   background-color: #fcfcfc;
 }
-
 
 .modal-content {
   margin-top: -10px;
