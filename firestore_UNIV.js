@@ -30,7 +30,6 @@ export const firebaseConfig = {
     appId: "1:46954820322:web:c19499507632da09a2a4bb",
     measurementId: "G-RPZYTFB5KC",
   };
-initializeApp(firebaseConfig);
 export const DB = getFirestore();
 
 var col_ref = null; // collrection reference
@@ -39,8 +38,7 @@ export let partnersArray = [];
 
 export const DB_RULES_AND_DATA = [
     // ["param1", "param2",...,"paramN",["key1", "key2",...,"keyN"]]
-    ["partner-2", ["partner"]],
-    ["nstp-3", ["household_name"]],
+    ["buklod-official", ["household_name"]],
 ];
 
 export function setCollection(collection_name){

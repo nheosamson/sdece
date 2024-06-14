@@ -8,7 +8,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
 
 // const db = getFirestore();
-setCollection("nstp-3");
+setCollection("buklod-official");
 var colRef = getCollection();
 
 var map = L.map("map").setView([14.673, 121.11215], 21);
@@ -30,10 +30,14 @@ getDocs(colRef)
   .then((querySnapshot) => {
     querySnapshot.forEach((entry) => {
       var doc = entry.data();
-      var marker = L.marker([
-        parseFloat(doc.latitude),
-        parseFloat(doc.longitude),
-      ]);
+      var marker;
+      // Some Locations are Null
+      if(doc.location_latitude != null || doc.location_longitude != null){
+        marker = L.marker([
+          parseFloat(doc.location_latitude),
+          parseFloat(doc.location_longitude),
+        ]);
+      }
       getDivContent(doc.household_name).then((div) =>{
         console.log(div);
         marker.bindPopup(div);
@@ -89,4 +93,8 @@ document.getElementById("locationList").addEventListener("click", (event) => {
   panLocation(event.target.innerHTML);
   console.log()
 });
+
+
+
+
 

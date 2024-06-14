@@ -13,7 +13,7 @@ export function getDivContent(name) {
             if(getCollection().id === rule[0]){    
               div_content += `<div class="partner-contact"> <div class="partner-label"> partner-label </div>`;
               for(let i = 0; i < rule[1].length; i++){
-                div_content += `<div class="partner-activity"> ${doc.get(rule[1][i])}`;
+                div_content += `<div class="partner-activity"> ${capitalizeFirstLetters(removeUnderscoresFromField(rule[1][i]))} ":   " ${doc.get(rule[1][i])}`;
               }
               div_content += `</div>`;
               break;
@@ -51,3 +51,21 @@ export function panLocation(name) {
       });
     });     
   }
+
+
+// Utility Function for Front-end (remove underscores from a string)
+export function removeUnderscoresFromField(field) {
+  const words = field.replace("_", ` `);
+  return words;
+}
+
+// Utility function for Front-end (Capitalize Like This)
+// USE AFTER removeUnderscoresFromField 
+export function capitalizeFirstLetters(field) {
+  const words = field.split(" ");
+  for(let i = 0; i < words.length; i++){  
+    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+  }
+
+  return words.join(" ");
+}
