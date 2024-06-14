@@ -99,7 +99,7 @@ export function getDocByID(docId) {
             let docObj = {};
             return getDoc(docReference).then(
                 (doc) => {
-                    docObj = doc.data();
+                    docObj = doc;
                     return docObj;
                 }
             );

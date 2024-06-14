@@ -1,6 +1,6 @@
 import { getPartnersArray, addEntry } from "./firestore.js";
 import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB_RULES_AND_DATA } from "/firestore_UNIV.js";
-// import { getDetails } from "/index_UNIV.js";
+import { getDivContent, searchLocation, panLocation } from "/index_UNIV.js";
 import {
   getFirestore,
   collection,
@@ -35,6 +35,7 @@ getDocs(colRef)
         parseFloat(doc.longitude),
       ]);
       getDivContent(doc.household_name).then((div) =>{
+        console.log(div);
         marker.bindPopup(div);
         results.addLayer(marker);
       });
@@ -43,20 +44,6 @@ getDocs(colRef)
   .catch((error) => {
     console.error("Error getting documents: ", error);
   });
-
-function searchLocation(doc) {
-  console.log("Search location of "+ doc.id);
-  let popup = L.popup()
-    .setLatLng([doc.latitude + 0.00015, doc.longitude] )
-    // can use rule engine for this.
-    .setContent(
-      getDetails(doc.household_name)
-    )
-    .openOn(map);
-
-  
-  map.panTo(new L.LatLng(doc.latitude, doc.longitude));
-}
 
 searchControl.on("results", function (data) {
   results.clearLayers();
@@ -98,47 +85,8 @@ function onMapClick(e) {
     );
   });
 }
-
-// map.on("click", onMapClick);
-map.panTo(new L.LatLng(14.652538, 121.077818));
-
-function panLocation(name) {
-  console.log("PANNNNNN to "+name);
-  getDocIdByPartnerName(name).then((docId) => {
-    getDocByID(docId).then((doc) => {
-      searchLocation(doc);
-    });
-  });     
-}
-
 document.getElementById("locationList").addEventListener("click", (event) => {
   panLocation(event.target.innerHTML);
+  console.log()
 });
 
-// Takes in a name to determine all field values which should be displayed 
-// Current Issue: it doesn't display all the added things, could be due to the async nature of these functions
-function getDivContent(name) {
-  let div_content = ``; // This isn't affected, this is the one getting printed
-  return getDocIdByPartnerName(name).then((docId) => {
-    if (docId) {
-      // console.log("is this seen")
-      return getDocByID(docId).then((doc) => {
-        // Insert the partner details into the div with class "partner-contact"
-        for(let rule of DB_RULES_AND_DATA){
-          if(getCollection().id === rule[0]){
-            div_content += `<div class="partner-contact"> <div class="partner-label"> partner-label </div>`;
-            for(let index in rule[1]){   
-              div_content += `<div class="partner-activity> ${doc.household_name} </div>`;   
-            }
-            div_content += `</div>`;
-            return div_content;
-          }
-        }
-      });
-    } else{
-        console.log("No matching partner found.");
-        div_content = "no partner";
-      return div_content;
-    }
-  });
-}
