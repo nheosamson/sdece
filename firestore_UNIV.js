@@ -37,10 +37,64 @@ var col_ref = null; // collrection reference
 
 export let partnersArray = [];
 
+// General format of the rule engine
 const DB_RULES_AND_DATA = [
-    // ["param1", "param2",...,"paramN",["key1", "key2",...,"keyN"]]
-    ["partner-2", ["partnerName"]],
-    ["nstp-3", ["household_name"]],
+    // ["collection_name", "identifier", ["field1", ... ,"fieldN"], "LinkedCollection" ] 
+    ["buklod-official", "household_name", 
+	    [
+        "contact_number",
+        "earthquake_risk",
+        "fire_risk",
+        "flood_risk",
+        "household_address",
+        "household_material",
+        "household_name",
+        "household_phase",
+        "is_hoa_noa",
+        "landslide_risk",
+        "location_latitude",
+        "location_longitude",
+        "location_link",
+        "nearest_evac",
+        "number_minors",
+        "number_pregnant",
+        "number_pwd",
+        "number_residents",
+        "number_seniors",
+        "number_sick",
+        "residency_status",
+        "sickness_present",
+        "status",
+        "storm_risk", ],
+        
+       "ORIGINAL",
+    ],
+    ["sdece-activity", "activity_nature", 
+	    [
+		    "activity_date",
+		    "activity_name",
+		    "activity_nature",
+		    "ateneo_contact_person",
+		    "ateneo_contact_email",
+		    "ateneo_office_oversight",
+		    "partner_name"
+	    ],
+	    
+	    "sdece-partners",
+	  ],
+	  ["sdece_partners", "partner_name",
+		  [
+			  "partner_address",
+			  "partner_contact_email",
+			  "partner_contact_no",
+			  "partner_contact_person",
+			  "partner_latitude",
+			  "partner_longitude",
+			  "partner_name",
+		  ],
+		  
+		  "ORIGINAL",
+	  ],
 
 ];
 
@@ -72,8 +126,8 @@ export function getDocIdByPartnerName(partnerName) {
             return getDocs(
                 query(
                     col_ref,
-                    where(rule[1][0], ">=", partnerName), // let's wait for Luigi's standardization. IF_ELSE nalang muna 
-                    where(rule[1][0], "<=", partnerName + endName)
+                    where(rule[1], ">=", partnerName), // let's wait for Luigi's standardization. IF_ELSE nalang muna 
+                    where(rule[1], "<=", partnerName + endName)
                 )
             )
             .then((querySnapshot) => {
@@ -114,3 +168,10 @@ export function getDocByID(docId) {
     }    
 }
 
+export function addEntry(){ //addDoc is a builtin function
+
+}
+
+export function editEntry(){
+
+}
