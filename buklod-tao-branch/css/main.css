@@ -6,6 +6,7 @@ body {
 .main {
   display: flex;
   flex-direction: row;
+  z-index: 3;
 }
 
 .map-container {
@@ -19,13 +20,27 @@ body {
   height: 100%;
 }
 
+.top-bar{
+  background-color: #387181;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  justify-content: flex-end;
+}
+
 .sidenav {
   flex: 0 0 20%;
   display: flex;
+  position: absolute;
+  width: 480px;
+  background-color: #F6F6F6;
   flex-direction: column;
   align-items: flex-start;
   overflow-y: auto;
   overflow-x: hidden;
+  z-index: 4;
 }
 
 .header {
@@ -96,10 +111,10 @@ li {
   color: #387181; /* Calypso */
 }
 
-.logout {
+/*.logout {
   display: flex;
   padding: 10px 10px;
-  z-index: 1;
+  z-index: 5;
   position: absolute;
   top: 30px;
   right: 30px;
@@ -107,15 +122,26 @@ li {
   gap: 8px;
   background-color: white;
   border-radius: 8px;
-}
+}*/
 
 .button-logout {
   font-family: Montserrat;
   font-size: 20px;
   font-weight: 600;
-  color: red;
-  padding: 10px 60px;
-  border-color: red;
+  color: rgb(255, 255, 255);
+  height: 56px;
+  width: 164px;
+  background-color: #3D97AF ;
+  border: none;
+  border-radius: 8px;
+  display: block;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin-right: 50px;
+  filter: drop-shadow(0 0 0.75rem #2F2F2F);
 }
 
 button.container {
@@ -125,6 +151,7 @@ button.container {
   align-self: stretch;
   border-radius: 10px;
   border: 0;
+  background-color: #F6F6F6;
 }
 
 button.label-font {
@@ -137,7 +164,8 @@ button.label-font {
 }
 
 button:hover {
-  background-color: #f7f9f9;
+  background-color: #003838;
+  cursor: pointer;
 }
 
 div.buttons {
@@ -171,7 +199,7 @@ img.accordion {
 }
 
 .entries {
-  background-color: #fafafa;
+  background-color: #F6F6F6;
   width: 100%;
 }
 
@@ -233,15 +261,53 @@ h1.entries {
   font-weight: 600;
   line-height: normal;
 }
-
-/* CSS for the modal */
-.modal {
+/* CSS for forms modal*/
+.form-modal {
   display: none;
   position: fixed;
   z-index: 9999;
   top: 0;
   left: 5%;
-  width: 75%; /* Adjust the width of the modal as needed */
+  width: 100%; /* Adjust the width of the modal as needed */
+  height: 100%; /* Adjust the height of the modal as needed */
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-modal-header {
+  margin-left: 25%;
+  margin-top: 5%;
+  padding: 10px 24px;
+  width: 100%;
+  max-width: 600px;
+  background-color: #fcfcfc;
+}
+
+.form-modal-content {
+  margin-top: -10px;
+  margin-left: 25%;
+  padding: 24px 32px;
+  width: 100%;
+  max-width: 584px;
+  border-radius: 8px;
+  background-color: #fcfcfc;
+  font-family: Hind;
+  font-size: 16px;
+  font-style: normal;
+  height: calc(80% - 140px);
+  overflow-y: auto;
+}
+
+/* CSS for the entry modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 10%;
+  left: 15%;
+  width: 100%; /* Adjust the width of the modal as needed */
+  max-width: 480px;
   height: 100%; /* Adjust the height of the modal as needed */
   justify-content: center;
   padding: 20px;
@@ -252,8 +318,7 @@ h1.entries {
   margin-left: 25%;
   margin-top: 5%;
   padding: 10px 24px;
-  width: 30%;
-  max-width: 600px;
+  width: 100%;
   background-color: #fcfcfc;
 }
 
@@ -262,9 +327,7 @@ h1.entries {
   margin-top: -10px;
   margin-left: 25%;
   padding: 24px 32px;
-  width: 30%;
-  max-width: 600px;
-  border-radius: 8px;
+  width: 96.3%;
   background-color: #fcfcfc;
   font-family: Hind;
   font-size: 16px;
