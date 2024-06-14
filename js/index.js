@@ -327,4 +327,16 @@ function closeModal() {
 	mainModal.classList.remove('flex');
 	mainModal.classList.add('hidden');
 }
+
 // Fuction for filtering results upon searching partners
+
+const newButton = document.getElementById('otherButton');
+newButton.addEventListener('click', testFunction);
+
+function testFunction() {
+	console.log('The button is working');
+
+	var m = document.getElementById('addModal');
+	m.classList.remove('hidden');
+	m.classList.add('flex');
+}
