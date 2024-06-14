@@ -13,7 +13,7 @@ export function getDivContent(name) {
             if(getCollection().id === rule[0]){    
               div_content += `<div class="partner-contact"> <div class="partner-label"> partner-label </div>`;
               for(let i = 0; i < rule[1].length; i++){
-                div_content += `<div class="partner-activity"> ${capitalizeFirstLetters(removeUnderscoresFromField(rule[1][i]))} ":   " ${doc.get(rule[1][i])}`;
+                div_content += `<div class="partner-activity"> ${readyField(rule[1][i])}: ${doc.get(rule[1][i])}`;
               }
               div_content += `</div>`;
               break;
@@ -29,28 +29,23 @@ export function getDivContent(name) {
     });
   }
  
-export function searchLocation(doc) {
+export function panLocation(name, map) {
+  console.log("PANNNNNN to " + name);   
+  getDocIdByPartnerName(name).then((docId) => {
+    getDocByID(docId).then((doc) => {
+      searchLocation(doc, map);
+    });
+  });     
+}
+
+export function searchLocation(doc, map) {
     console.log("Search location of "+ doc.id);
-    let popup = L.popup()
-      .setLatLng([doc.latitude + 0.00015, doc.longitude])
-      // can use rule engine for this.
-      .setContent(
-        getDivContent(doc.household_name)
-      )
-      .openOn(map);
-    
-    map.panTo(new L.LatLng(doc.latitude, doc.longitude));
+    doc = doc.data();
+         console.log(typeof(map));   
+    map.panTo(new L.LatLng(doc.location_latitude, doc.location_longitude));
   }
 
 
-export function panLocation(name) {
-    console.log("PANNNNNN to " + name);   
-    getDocIdByPartnerName(name).then((docId) => {
-      getDocByID(docId).then((doc) => {
-        searchLocation(doc);
-      });
-    });     
-  }
 
 
 // Utility Function for Front-end (remove underscores from a string)
@@ -66,6 +61,12 @@ export function capitalizeFirstLetters(field) {
   for(let i = 0; i < words.length; i++){  
     words[i] = words[i][0].toUpperCase() + words[i].substr(1);
   }
-
   return words.join(" ");
+}
+
+// Utility function for Front-end
+export function readyField(field){
+  field = removeUnderscoresFromField(field);
+  field = capitalizeFirstLetters(field);
+  return field;
 }

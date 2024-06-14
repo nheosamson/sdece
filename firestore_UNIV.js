@@ -38,7 +38,7 @@ export let partnersArray = [];
 
 export const DB_RULES_AND_DATA = [
     // ["param1", "param2",...,"paramN",["key1", "key2",...,"keyN"]]
-    ["buklod-official", ["household_name"]],
+    ["buklod-official", ["household_name", "earthquake_risk", "fire_risk", "flood_risk"]],
 ];
 
 export function setCollection(collection_name){

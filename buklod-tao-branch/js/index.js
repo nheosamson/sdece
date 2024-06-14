@@ -9,11 +9,10 @@ import {
 
 // const db = getFirestore();
 setCollection("buklod-official");
-var colRef = getCollection();
+var col_ref = getCollection();
 
 var map = L.map("map").setView([14.673, 121.11215], 21);
 
-console.log(colRef);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
@@ -25,13 +24,13 @@ var searchControl = L.esri.Geocoding.geosearch().addTo(map);
 var results = L.layerGroup().addTo(map);
 var popup = L.popup();
 
-// fix this part so that it will load the pins at start
-getDocs(colRef)
+// Loads art the start
+getDocs(col_ref)
   .then((querySnapshot) => {
     querySnapshot.forEach((entry) => {
       var doc = entry.data();
       var marker;
-      // Some Locations are Null
+      // Some coordinated are null, protective check
       if(doc.location_latitude != null || doc.location_longitude != null){
         marker = L.marker([
           parseFloat(doc.location_latitude),
@@ -89,8 +88,9 @@ function onMapClick(e) {
     );
   });
 }
+
 document.getElementById("locationList").addEventListener("click", (event) => {
-  panLocation(event.target.innerHTML);
+  panLocation(event.target.innerHTML, map);
   console.log()
 });
 
