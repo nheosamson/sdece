@@ -56,14 +56,42 @@ async function searchLocation(loc) {
               <p>[Ateneo Person Email]</p>
             </div>
 
-            <button class="text-red-600">Click for more details.</button>
+            <button class="expandPopUp text-red-600">Click for more details.</button>
           </div>
           `;
+
+
                 
         marker.bindPopup(popupContent);
         results.addLayer(marker);
 
         marker.on("popupopen", function () {
+          var expandButtons = document.getElementsByClassName("expandPopUp");
+          for (var i = 0; i < expandButtons.length; i++) {
+            expandButtons[i].addEventListener("click", function () {        
+                // Select the modal and partnerName elements
+                var modal = document.getElementById("partnerModal");
+        
+                // TODO: Integrate this functionality into the modal instead     
+                // var partnerName = this.getAttribute("data-loc");
+                //       window.open(
+                //         `editloc.html?partnerName=${encodeURIComponent(partnerName)}`,
+                //         "_blank"
+                //       );
+        
+                // Display the modal
+                modal.classList.remove("hidden");
+                modal.classList.add("flex")
+                
+                // Close the modal when the user clicks anywhere outside of it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.classList.add("hidden");
+                    }
+                }
+            });
+          }
+
           // Edit Location form
           var editButtons = document.getElementsByClassName("editButton");
           for (var i = 0; i < editButtons.length; i++) {
@@ -92,31 +120,31 @@ async function searchLocation(loc) {
 }
 
 
-          // Pop up toggle show/hide
-          var acc = document.getElementsByClassName("popup-accordion");
-          var i;
+        // Pop up toggle show/hide
+        var acc = document.getElementsByClassName("popup-accordion");
+        var i;
 
-          for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-              /* Toggle between adding and removing the "active" class,
-              to highlight the button that controls the panel */
-              this.classList.toggle("active");
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            /* Toggle between adding and removing the "active" class,
+            to highlight the button that controls the panel */
+            this.classList.toggle("active");
 
-              /* Toggle between hiding and showing the active panel */
-              var contents = this.nextElementSibling;
-              if (contents.style.display === "block") {
-                contents.style.display = "none";
-              } else {
-                contents.style.display = "block";
-              }
-            });
-          }
-        });
-        marker.on("click", function (event) {
-          console.log(getDetails(entry["name"]));
-        });
+            /* Toggle between hiding and showing the active panel */
+            var contents = this.nextElementSibling;
+            if (contents.style.display === "block") {
+              contents.style.display = "none";
+            } else {
+              contents.style.display = "block";
+            }
+          });
+        }
+      });
+      marker.on("click", function (event) {
+        console.log(getDetails(entry["name"]));
       });
     });
+  });
 }
 
 searchControl.on("results", function (data) {
