@@ -99,6 +99,7 @@ async function searchLocation(loc) {
         // Select the modal and partnerName elements
         var modal = document.getElementById("editModal");
 
+        var partnerModal = document.getElementById("partnerModal")
         // TODO: Integrate this functionality into the modal instead     
         // var partnerName = this.getAttribute("data-loc");
         //       window.open(
@@ -109,6 +110,7 @@ async function searchLocation(loc) {
         // Display the modal
         modal.classList.remove("hidden");
         modal.classList.add("flex")
+        partnerModal.classList.add("hidden") // Not sure if this should be hidden nalang, or should be kept open with the editModal on top nalang
         
         // Close the modal when the user clicks anywhere outside of it
         window.onclick = function(event) {
