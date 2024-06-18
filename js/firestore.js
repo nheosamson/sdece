@@ -12,25 +12,24 @@ import {
   where,
   getDoc,
 } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
-
+import { getCollection, setCollection } from "/firestore_UNIV.js";
 // Your Firestore code here
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAeo2wTJFotROMNPa4UHXo2MqPaW8k07us",
-  authDomain: "compsat-sdece.firebaseapp.com",
-  databaseURL:
-    "https://compsat-sdece-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "compsat-sdece",
-  storageBucket: "compsat-sdece.appspot.com",
-  messagingSenderId: "46954820322",
-  appId: "1:46954820322:web:c19499507632da09a2a4bb",
-  measurementId: "G-RPZYTFB5KC",
+  apiKey: "AIzaSyA8QWgic_hjbDL-EYIkvSRRII_yfTRdtOQ",
+  authDomain: "discs-osci-prj.firebaseapp.com",
+  projectId: "discs-osci-prj",
+  storageBucket: "discs-osci-prj.appspot.com",
+  messagingSenderId: "601571823960",
+  appId: "1:601571823960:web:1f1278ecb86aa654e6152d",
+  measurementId: "G-9N9ELDEMX9",
 };
 initializeApp(firebaseConfig);
 const db = getFirestore();
-const colRef = collection(db, "partners-2");
+setCollection("sdece-official");
+const colRef = getCollection();
 let partnersArray = [];
 
 export function getDocIdByPartnerName(partnerName) {
@@ -103,16 +102,16 @@ getDocs(colRef)
       addressDiv.classList.add("address", "text-sm", "text-customGray", "font-hind", "font-regular", "leading-[120%]", "mt-2");
       activityDiv.classList.add("activity", "text-sm", "text-customBlack", "font-hind", "font-regular","leading-[110%]", "mt-2");
 
-      nameDiv.textContent = partner.partnerName;
-      addressDiv.textContent = partner.partnerAddress;
-      activityDiv.textContent = "";
+      nameDiv.textContent = partner.partner_name;
+      addressDiv.textContent = partner.partner_city;
+      activityDiv.textContent = partner.activity_name;
 
-      if (partner.activities.length > 0)      // check if list of activities is present, otherwise is skipped to avoid errors
-      {
-        partner.activities.forEach( (activity) => {
-          activityDiv.innerHTML += activity.activityName + "<br/>";       // there might be a better way to display multiple activities
-        });
-      }
+      // if (partner.activities.length > 0)      // check if list of activities is present, otherwise is skipped to avoid errors
+      // {
+      //   partner.activities.forEach( (activity) => {
+      //     activityDiv.innerHTML += activity.activityName + "<br/>";       // there might be a better way to display multiple activities
+      //   });
+      // }
       
 
       listItem.classList.add("accordion", "py-6", "px-8", 

@@ -102,7 +102,6 @@ export const DB_RULES_AND_DATA = [
 ];
 
 export function setCollection(collection_name){
-    console.log("collection name: " + collection_name);
     
     for(let rule of DB_RULES_AND_DATA ){
         console.log("rule[0]: " + rule[0]);
@@ -120,7 +119,6 @@ export function getCollection(){
 }
 
 export function getDocIdByPartnerName(partner_name) {
-    console.log("GET_DOC_ID_BY_PARTNER_NAME " + partner_name + " in " + col_ref.id);
     const endName = partner_name.replace(/\s/g, "\uf8ff");
 
     //rule loop
@@ -152,7 +150,6 @@ export function getDocIdByPartnerName(partner_name) {
 }
 
 export function getDocsByPartnerName(partner_name){
-    console.log("GET_DOC_ID_BY_PARTNER_NAME " + partner_name + " in " + col_ref.id);
     const endName = partner_name.replace(/\s/g, "\uf8ff");
 
     //rule loop

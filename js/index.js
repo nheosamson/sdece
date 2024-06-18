@@ -1,3 +1,4 @@
+import { } from "./firestore.js"
 import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
 import {
   getFirestore,
@@ -12,17 +13,16 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
 //import { getDocIdByPartnerName, getDocByID } from "firestore_UNIV.js";
 
-var map = L.map("map").setView([14.651, 121.052], 13);
-setCollection("sdece-official");
 var colRef = getCollection();
 
-//list down all documents under the collection in console.log
-const querySnapshot = await getDocs(colRef);
-console.log(querySnapshot);
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
-});
+var map = L.map("map").setView([14.651, 121.052], 13);
+// //list down all documents under the collection in console.log
+// const querySnapshot = await getDocs(colRef);
+// console.log(querySnapshot);
+// querySnapshot.forEach((doc) => {
+//   // doc.data() is never undefined for query doc snapshots
+//   console.log(doc.id, " => ", doc.data());
+// });
 
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -271,83 +271,10 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 map.panTo(new L.LatLng(14.652538, 121.077818));
 
-function panLocation(name) {
-  getDocIdByPartnerName(name).then((docId) => {
-    getDocByID(docId).then((doc) => {
-      console.log(doc);
-      console.log(`Panning to ${doc.location.latitude}, ${doc.location.longitude}`);
-      map.panTo(new L.LatLng(doc.location.latitude, doc.location.longitude));
-      console.log(`Searching for ${doc.partnerName}`);
-      searchLocation(doc);
-    });
-  });
-}
-
 document.getElementById('locationList').addEventListener('click', (event) => {
-	panLocation(event.target.innerHTML);
+	searchLocation(event.target.innerHTML, map);
+	console.log("I'm searching");
 });
-
-function getDetails(name) {
-	getDocIdByPartnerName(name).then((docId) => {
-		if (docId) {
-			getDocByID(docId).then((doc) => {
-				console.log('Partner details:', doc);
-				// Insert the partner details into the div with class "partner-contact"
-				const partnerContactDiv =
-					document.querySelector('.partner-contact');
-				if (partnerContactDiv) {
-					doc.activities.forEach((activity) => {
-						// current lists down all of activities, revamp if needed
-						partnerContactDiv.innerHTML += `
-            <div class="partner-info">
-              <p class="partner-activity"> ${activity.activityName}</p>
-            </div>
-
-            <br>
-
-            <div class="partner-info">
-              <p class="partner-label">Contact Person</p>
-              <p class="partner-value">${activity.ateneoContactPerson}</p>
-            </div>
-
-            <br>            
-
-            <div class="partner-info">
-              <p class="partner-label">Organization / Unit</p>
-              <p class="partner-value"> ${activity.ateneoOrganization}</p>
-            </div>
-            
-            <br>
-
-            <div class="partner-info">
-              <p class="partner-label">Date/s of Partnership</p>
-              <p class="partner-value"> ${activity.activityDate.toDate()}</p>   <!-- find a way to format this into just Date -->
-            </div>
-
-              <hr>
-              <br>
-              <h2>Ateneo Office Oversight</h2> 
-
-            <div class="partner-info">          
-              <p class="partner-label">${activity.ateneoOverseeingOffice}</p>
-              <p class="partner-value"> ${activity.ateneoContactEmail}</p>
-              <p class="partner-value"> ${
-				activity.ateneoOverseeingOfficeEmail
-			}</p>
-              </div>
-            `;
-					});
-				} else {
-					console.log(
-						"Div with class 'partner-contact' not found."
-					);
-				}
-			});
-		} else {
-			console.log('No matching partner found.');
-		}
-	});
-}
 
 // Show main Add an activity modal
 const element = document.getElementById('mainButton');

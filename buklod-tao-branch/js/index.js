@@ -1,5 +1,5 @@
 
-// import { getPartnersArray, addEntry } from "./firestore.js";
+import {  } from "./firestore.js";
 import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
 import { getDivContent, searchLocation, panLocation } from "/index_UNIV.js";
 import {
@@ -8,17 +8,7 @@ import {
   getDocs,
 } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
 
-// const db = getFirestore();
-setCollection("buklod-official");
 var colRef = getCollection();
-
-//list down all documents under the collection in console.log
-const querySnapshot = await getDocs(colRef);
-console.log(querySnapshot);
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
-});
 
 var map = L.map("map").setView([14.673, 121.11215], 21);
 
@@ -34,7 +24,7 @@ var results = L.layerGroup().addTo(map);
 var popup = L.popup();
 
 // Loads art the start
-getDocs(col_ref)
+getDocs(colRef)
   .then((querySnapshot) => {
     querySnapshot.forEach((entry) => {
       var doc = entry.data();
