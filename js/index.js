@@ -1,6 +1,9 @@
-import { getDocIdByPartnerName, getDocByID } from './firestore.js';
+//import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
+import { getDocIdByPartnerName, getDocByID } from "./firestore.js";
 
-var map = L.map('map').setView([14.651, 121.052], 13);
+var map = L.map("map").setView([14.651, 121.052], 13);
+//setCollection("partner-2");
+//var colRef = getCollection();
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	attribution:
@@ -165,13 +168,37 @@ async function searchLocation(loc) {
 		});
 }
 
-searchControl.on('results', function (data) {
-	results.clearLayers();
-	for (var i = data.results.length - 1; i >= 0; i--) {
-		var marker = L.marker(data.results[i].latlng);
-		console.log(marker);
-		results.addLayer(marker);
-	}
+function searchLocation(doc) {// just add a marker at this location
+  console.log("adding markers in "+doc.partnerName+" at "+ 
+    "lat: "+ doc.location.latitude +
+    "long: "+ doc.location.longitude);
+  var marker = L.marker([
+    parseFloat(doc.location.latitude),
+    parseFloat(doc.location.longitude),
+  ]);
+
+  results.addLayer(marker);
+  // console.log("Search location of "+ doc.id);
+  // let popup = L.popup()
+  //   .setLatLng([doc.latitude + 0.00015, doc.longitude] )
+  //   .setContent(`
+  //   <div class="leaflet-popup-container">
+  //   <h2 class="partner-header">${doc.household_name}</h2>          
+  //   <div class="partner-contact">${doc.address} ${doc.phase}</div>
+  //   `)
+  //   .openOn(map);
+
+  
+  // map.panTo(new L.LatLng(doc.latitude, doc.longitude));
+}
+
+searchControl.on("results", function (data) {
+  results.clearLayers();
+  for (var i = data.results.length - 1; i >= 0; i--) {
+    var marker = L.marker(data.results[i].latlng);
+    console.log(marker);
+    results.addLayer(marker);
+  }
 });
 
 function onMapClick(e) {
@@ -225,19 +252,15 @@ map.on('click', onMapClick);
 map.panTo(new L.LatLng(14.652538, 121.077818));
 
 function panLocation(name) {
-	getDocIdByPartnerName(name).then((docId) => {
-		getDocByID(docId).then((doc) => {
-			console.log(doc);
-			console.log(
-				`Panning to ${doc.location.latitude}, ${doc.location.longitude}`
-			);
-			map.panTo(
-				new L.LatLng(doc.location.latitude, doc.location.longitude)
-			);
-			console.log(`Searching for ${doc.partnerName}`);
-			searchLocation(doc.partnerName);
-		});
-	});
+  getDocIdByPartnerName(name).then((docId) => {
+    getDocByID(docId).then((doc) => {
+      console.log(doc);
+      console.log(`Panning to ${doc.location.latitude}, ${doc.location.longitude}`);
+      map.panTo(new L.LatLng(doc.location.latitude, doc.location.longitude));
+      console.log(`Searching for ${doc.partnerName}`);
+      searchLocation(doc);
+    });
+  });
 }
 
 document.getElementById('locationList').addEventListener('click', (event) => {
