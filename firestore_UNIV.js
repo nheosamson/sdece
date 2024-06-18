@@ -19,17 +19,28 @@ import {
 
 console.log("UNIVERSAL JS LOADING ");
   
+// export const firebaseConfig = {
+//     apiKey: "AIzaSyAeo2wTJFotROMNPa4UHXo2MqPaW8k07us",
+//     authDomain: "compsat-sdece.firebaseapp.com",
+//     databaseURL:
+//       "https://compsat-sdece-default-rtdb.asia-southeast1.firebasedatabase.app",
+//     projectId: "compsat-sdece",
+//     storageBucket: "compsat-sdece.appspot.com",
+//     messagingSenderId: "46954820322",
+//     appId: "1:46954820322:web:c19499507632da09a2a4bb",
+//     measurementId: "G-RPZYTFB5KC",
+//   };
+
 export const firebaseConfig = {
-    apiKey: "AIzaSyAeo2wTJFotROMNPa4UHXo2MqPaW8k07us",
-    authDomain: "compsat-sdece.firebaseapp.com",
-    databaseURL:
-      "https://compsat-sdece-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "compsat-sdece",
-    storageBucket: "compsat-sdece.appspot.com",
-    messagingSenderId: "46954820322",
-    appId: "1:46954820322:web:c19499507632da09a2a4bb",
-    measurementId: "G-RPZYTFB5KC",
-  };
+  apiKey: "AIzaSyA8QWgic_hjbDL-EYIkvSRRII_yfTRdtOQ",
+  authDomain: "discs-osci-prj.firebaseapp.com",
+  projectId: "discs-osci-prj",
+  storageBucket: "discs-osci-prj.appspot.com",
+  messagingSenderId: "601571823960",
+  appId: "1:601571823960:web:1f1278ecb86aa654e6152d",
+  measurementId: "G-9N9ELDEMX9"
+};
+
 initializeApp(firebaseConfig);
 export const DB = getFirestore();
 
@@ -68,7 +79,7 @@ const DB_RULES_AND_DATA = [
         "status",
         "storm_risk", ],
     ],
-    ["sdece-final", "partner_name", 
+    ["sdece-official", "partner_name", 
 	    [
 		    "partner_latitude",
 		    "partner_longitude",
