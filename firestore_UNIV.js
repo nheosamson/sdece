@@ -39,7 +39,8 @@ export let partnersArray = [];
 
 // General format of the rule engine
 const DB_RULES_AND_DATA = [
-    // ["collection_name", "identifier", ["field1", ... ,"fieldN"], "LinkedCollection" ] 
+    // ["collection_name", "identifier", 
+		//     ["field1", ... ,"fieldN"] ]; 
     ["buklod-official", "household_name", 
 	    [
         "contact_number",
@@ -66,36 +67,28 @@ const DB_RULES_AND_DATA = [
         "sickness_present",
         "status",
         "storm_risk", ],
-        
-       "ORIGINAL",
     ],
-    ["sdece-activity", "activity_nature", 
+    ["sdece-final", "partner_name", 
 	    [
+		    "partner_latitude",
+		    "partner_longitude",
+		    "partner_location",
+		    "partner_city",
+		    "partner_name",
+		    "additional_partnership",
+		    "partner_contact",
+		    "partner_number",
+		    "partner_email",
 		    "activity_date",
-		    "activity_name",
 		    "activity_nature",
-		    "ateneo_contact_person",
-		    "ateneo_contact_email",
-		    "ateneo_office_oversight",
-		    "partner_name"
+		    "activity_name",
+		    "organization_unit",
+		    "admu_office",
+		    "admu_contact",
+		    "admu_email",
 	    ],
+    ]
 	    
-	    "sdece-partners",
-	  ],
-	  ["sdece_partners", "partner_name",
-		  [
-			  "partner_address",
-			  "partner_contact_email",
-			  "partner_contact_no",
-			  "partner_contact_person",
-			  "partner_latitude",
-			  "partner_longitude",
-			  "partner_name",
-		  ],
-		  
-		  "ORIGINAL",
-	  ],
-
 ];
 
 export function setCollection(collection_name){
@@ -116,9 +109,9 @@ export function getCollection(){
     return col_ref;
 }
 
-export function getDocIdByPartnerName(partnerName) {
-    console.log("GET_DOC_ID_BY_PARTNER_NAME " + partnerName + " in " + col_ref.id);
-    const endName = partnerName.replace(/\s/g, "\uf8ff");
+export function getDocIdByPartnerName(partner_name) {
+    console.log("GET_DOC_ID_BY_PARTNER_NAME " + partner_name + " in " + col_ref.id);
+    const endName = partner_name.replace(/\s/g, "\uf8ff");
 
     //rule loop
     for ( let rule of DB_RULES_AND_DATA ){
@@ -126,8 +119,8 @@ export function getDocIdByPartnerName(partnerName) {
             return getDocs(
                 query(
                     col_ref,
-                    where(rule[1], ">=", partnerName), // let's wait for Luigi's standardization. IF_ELSE nalang muna 
-                    where(rule[1], "<=", partnerName + endName)
+                    where(rule[1], ">=", partner_name), // let's wait for Luigi's standardization. IF_ELSE nalang muna 
+                    where(rule[1], "<=", partner_name + endName)
                 )
             )
             .then((querySnapshot) => {
@@ -149,6 +142,40 @@ export function getDocIdByPartnerName(partnerName) {
     }
 }
 
+export function getDocsByPartnerName(partner_name){
+    console.log("GET_DOC_ID_BY_PARTNER_NAME " + partner_name + " in " + col_ref.id);
+    const endName = partner_name.replace(/\s/g, "\uf8ff");
+
+    //rule loop
+    for ( let rule of DB_RULES_AND_DATA ){
+        if (col_ref.id === rule[0]){
+            return getDocs(
+                query(
+                    col_ref,
+                    where(rule[1], ">=", rule[1]), // let's wait for Luigi's standardization. IF_ELSE nalang muna 
+                    where(rule[1], "<=", rule[1] + endName)
+                )
+            )
+            .then((querySnapshot) => {
+                console.log(querySnapshot);
+                if (!querySnapshot.empty) {
+                // Assuming there is only one document with the given partner name
+                const docs = querySnapshot.docs;
+                return docs;
+                } else {
+                console.log("EMPTY: No matching document found.");
+                return null;
+                }
+            })
+            .catch((error) => {
+                console.error("Error getting documents: ", error);
+                return null;
+            });
+        }
+    }
+}
+
+
 export function getDocByID(docId) {
 
     console.log("GET_DOC_ID");
@@ -165,13 +192,48 @@ export function getDocByID(docId) {
                 }
             );
         }
+        
     }    
 }
 
-export function addEntry(){ //addDoc is a builtin function
+export function addEntry(inp_array){ //addDoc is a builtin function
+    console.log("add Entry");
 
+    for (let rule of DB_RULES_AND_DATA){
+        if(rule[0] === col_ref.id){
+            let input = {}; // contents depend on the rule engine
+            for(let i = 0; i < inp_array.length; i++){
+                input[rule[2][i]] = inp_array[i];
+            }
+            addDoc(col_ref, input).then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+              })
+              .catch((error) => {
+                console.error("Error adding document: ", error);
+              });
+            break;
+        }
+    }
 }
 
-export function editEntry(){
+export function editEntry(inp_array, docId){
+    console.log("edit entry with id "+docId);
+    
+    for (let rule of DB_RULES_AND_DATA){
+        if(rule[0] === col_ref.id){
+            const docReference = doc(DB, rule[0], docId);
 
+            let input = {}; // contents depend on the rule engine
+            for(let i = 0; i < inp_array.length; i++){
+                input[rule[2][i]] = inp_array[i];
+            }
+            updateDoc(docReference, input).then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+              })
+              .catch((error) => {
+                console.error("Error adding document: ", error);
+              });
+            break;
+        }
+    }
 }
