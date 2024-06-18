@@ -127,10 +127,12 @@ getDocs(colRef)
 
 function showModal(partner) {
   const modal = document.getElementById("partnerModal");
+  const modalHeader = document.getElementById("modalHeader");
   const modalContent = document.getElementById("modalContent");
 
   // Clear previous content
   modalContent.innerHTML = "";
+  modalHeader.innerHTML = "";
 
   // Create div elements for each piece of information
   const nameDiv = document.createElement("div");
@@ -174,8 +176,8 @@ function showModal(partner) {
     + "</ul></div>";
   
   // Append the div elements to the modal content
-  modalContent.appendChild(nameDiv);
-  modalContent.appendChild(addressDiv);
+  modalHeader.appendChild(nameDiv);
+  modalHeader.appendChild(addressDiv);
   modalContent.appendChild(contactNumberDiv);
   modalContent.appendChild(evacAreaDiv);
   modalContent.appendChild(riskDiv);

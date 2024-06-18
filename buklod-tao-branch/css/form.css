@@ -2,25 +2,41 @@
 
 div.container {
     margin: auto;
-    width: 70%;
-    align-self: center;
+    width: 50%; 
 }
 
 div.input_container {
     align-self: center;
     margin-top: 8px;
     margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+select.attribs {
+    display: block; 
+    margin-bottom: 10px;
+    width: 100px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Hind'; font-size: 20px;
+    border-style: double;
+    border-color: rgb(196, 196, 196);
+    border-width: 0.5px;
+    border-radius: 3px;
 }
 
 input.attribs {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #3D97AF;
-    height: 40px;
-    margin-top: 4px;
-    font-family: "Source Sans Pro";
-    font-size: 20px;
-    color: #393939;
+    display: block; 
+    margin-bottom: 10px;
+    width: 300px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Hind'; font-size: 20px;
+    border-style: double;
+    border-color: rgb(196, 196, 196);
+    border-width: 0.5px;
+    border-radius: 3px;
 }
 
 input.attribs:focus {
@@ -33,18 +49,17 @@ input.attribs::placeholder {
     font-style: italic;
 }
 
-span.button_div {
-    margin: auto;
-    display: table;
+.button-container {
     width: 100%;
     text-align: center;
 }
 
 button.clear {
-    align-self: left;
     background-color: white;
-    color: #D64747;
-    border: none;
+    color: red;
+    border-width: 4px;
+    border-radius: 10px;
+    border-color: red;
 }
 
 button.clear:hover {
@@ -52,10 +67,10 @@ button.clear:hover {
 }
 
 button.confirm {
-    align-self: right;
-    margin-left: 20%;
     background-color: #49A2BB;
     color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
 }
 
 button.confirm:hover {
@@ -63,14 +78,13 @@ button.confirm:hover {
 }
 
 button.form {
-    width: 160px;
+    align-items: center;
+    width: 100%;
     height: 48px;
     font-family: "Montserrat", sans-serif;
     font-weight: 900;
     cursor: pointer;
     outline: none;
-    border: none;
-    border-radius: 10px;
 }
 
 label.form {
@@ -78,4 +92,26 @@ label.form {
     font-weight: 500;
     font-size: 16px;
     color: #7DAAB7;
+}
+
+label.disaster-form {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #7DAAB7;
+    width: 100px;
+}
+
+.form-header {
+    font-family: "Montserrat";
+    font-weight: 900;
+    font-size: 24px;
+    color: #004153;
+}
+
+.sub-header {
+    font-family: "Montserrat";
+    font-weight: 900;
+    font-size: 20px;
+    color: #10abd5;
 }
