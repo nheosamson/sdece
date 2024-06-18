@@ -12,8 +12,8 @@ export function getDivContent(name) {
           for(let rule of DB_RULES_AND_DATA){
             if(getCollection().id === rule[0]){    
               div_content += `<div class="partner-contact"> <div class="partner-label"> partner-label </div>`;
-              for(let i = 0; i < rule[1].length; i++){
-                div_content += `<div class="partner-activity"> ${readyField(rule[1][i])}: ${doc.get(rule[1][i])}`;
+              for(let i = 0; i < rule[2].length; i++){
+                div_content += `<div class="partner-activity"> ${readyField(rule[2][i])}: ${doc.get(rule[2][i])}`;
               }
               div_content += `</div>`;
               break;
@@ -41,11 +41,9 @@ export function searchLocation(name, map) {
 export function panLocation(doc, map) {
     console.log("Search location of "+ doc.id);
     doc = doc.data();
-         console.log(typeof(map));   
+    console.log(typeof(map));   
     map.panTo(new L.LatLng(doc.location_latitude, doc.location_longitude));
 }
-
-
 
 // function onMapClick(e) {
 //   const lat = e.latlng.lat;
@@ -90,10 +88,10 @@ export function removeUnderscoresFromField(field) {
 
 // Utility function for Front-end (Capitalize Like This)
 // USE AFTER removeUnderscoresFromField 
-export function capitalizeFirstLetters(field) {
+export function capitalizeFirstLetters(field) { 
   const words = field.split(" ");
   for(let i = 0; i < words.length; i++){  
-    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+    words[i] = words[i].charAt(0).toUpperCase() + words[i].substr(1);
   }
   return words.join(" ");
 }

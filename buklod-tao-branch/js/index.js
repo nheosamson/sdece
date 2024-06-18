@@ -31,14 +31,14 @@ getDocs(col_ref)
       var doc = entry.data();
       var marker;
       // Some coordinated are null, protective check
-      if(doc.location_latitude != null || doc.location_longitude != null){
+      if(doc.location_coordinates != null){
         marker = L.marker([
-          parseFloat(doc.location_latitude),
-          parseFloat(doc.location_longitude),
-        ]);
+          parseFloat(doc.location_coordinates.latitude),
+          parseFloat(doc.location_coordinates.longitude),
+        ])
+        console.log("I DID THIS");
       }
       getDivContent(doc.household_name).then((div) =>{
-        console.log(div);
         marker.bindPopup(div);
         results.addLayer(marker);
       });

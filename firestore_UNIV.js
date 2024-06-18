@@ -37,7 +37,7 @@ var col_ref = null; // collrection reference
 export let partnersArray = [];
 
 // General format of the rule engine
-const DB_RULES_AND_DATA = [
+export const DB_RULES_AND_DATA = [
     // ["collection_name", "identifier", 
 		//     ["field1", ... ,"fieldN"] ]; 
     ["buklod-official", "household_name", 
@@ -52,8 +52,7 @@ const DB_RULES_AND_DATA = [
         "household_phase",
         "is_hoa_noa",
         "landslide_risk",
-        "location_latitude",
-        "location_longitude",
+        "location_coordinates",
         "location_link",
         "nearest_evac",
         "number_minors",
@@ -67,6 +66,7 @@ const DB_RULES_AND_DATA = [
         "status",
         "storm_risk", ],
     ],
+
     ["sdece-final", "partner_name", 
 	    [
 		    "partner_latitude",
@@ -93,7 +93,7 @@ const DB_RULES_AND_DATA = [
 export function setCollection(collection_name){
     console.log("collection name: " + collection_name);
     
-    for( let rule of DB_RULES_AND_DATA ){
+    for(let rule of DB_RULES_AND_DATA ){
         console.log("rule[0]: " + rule[0]);
         if (rule[0] === collection_name){
             console.log("IS EQUAL");
