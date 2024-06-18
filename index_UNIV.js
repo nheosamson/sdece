@@ -42,7 +42,7 @@ export function panLocation(doc, map) {
     console.log("Search location of "+ doc.id);
     doc = doc.data();
     console.log(typeof(map));   
-    map.panTo(new L.LatLng(doc.location_latitude, doc.location_longitude));
+    map.panTo(new L.LatLng(doc.location_coordinates.latitude, doc.location_coordinates.longitude));
 }
 
 // function onMapClick(e) {
@@ -103,6 +103,11 @@ export function readyField(field){
   return field;
 }
 
+// Listeners
+document.getElementById("locationList").addEventListener("click", (event) => {
+  searchLocation(event.target.innerHTML, map);
+  console.log("searching")
+});
 
 
 
