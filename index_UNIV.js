@@ -43,9 +43,6 @@ export function panLocation(doc, map) {
 	var lat = doc.partner_coordinates._lat;
 	var long = doc.partner_coordinates._long;
 	map.panTo(new L.LatLng(lat, long));
-	// map.setZoom(50);
-
-	// TODO: Display pop-up on pan
 }
 
 export function searchLocation(name, map) {
