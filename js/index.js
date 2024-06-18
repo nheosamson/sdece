@@ -1,22 +1,29 @@
-import { } from "./firestore.js"
-import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
-import { getDivContent } from "/index_UNIV.js";
+import {} from './firestore.js';
 import {
-  getFirestore,
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  doc,
-  query,
-  where,
-  getDoc,
-} from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
+	getDocIdByPartnerName,
+	getDocByID,
+	setCollection,
+	getCollection,
+	DB,
+} from '/firestore_UNIV.js';
+import { getDivContent } from '/index_UNIV.js';
+import {
+	getFirestore,
+	collection,
+	getDocs,
+	addDoc,
+	updateDoc,
+	doc,
+	query,
+	where,
+	getDoc,
+} from 'https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js';
 //import { getDocIdByPartnerName, getDocByID } from "firestore_UNIV.js";
 
 var colRef = getCollection();
 
-var map = L.map("map").setView([14.651, 121.052], 13);
+export var map = L.map('map').setView([14.651, 121.052], 13);
+
 // //list down all documents under the collection in console.log
 // const querySnapshot = await getDocs(colRef);
 // console.log(querySnapshot);
@@ -24,7 +31,6 @@ var map = L.map("map").setView([14.651, 121.052], 13);
 //   // doc.data() is never undefined for query doc snapshots
 //   console.log(doc.id, " => ", doc.data());
 // });
-
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	attribution:
@@ -38,39 +44,38 @@ var popup = L.popup();
 
 // Loads art the start
 getDocs(colRef)
-  .then((querySnapshot) => {
-    querySnapshot.forEach((entry) => {
-      var doc = entry.data();
-      var marker;
-      // Some coordinated are null, protective check
-      if(doc.partner_coordinates != null){
-        marker = L.marker([
-          parseFloat(doc.partner_coordinates.latitude),
-          parseFloat(doc.partner_coordinates.longitude),
-        ])
-		
-      }
-      // TODO HAVE THIS BE CONSISTENT ACROSS EVERYTHING
-      getDivContent(doc.partner_name).then((div) =>{
-        marker.bindPopup(div);
-        results.addLayer(marker);
-      });
-    });
-  })
-  .catch((error) => {
-    console.error("Error getting documents: ", error);
-  });
+	.then((querySnapshot) => {
+		querySnapshot.forEach((entry) => {
+			var doc = entry.data();
+			var marker;
+			// Some coordinated are null, protective check
+			if (doc.partner_coordinates != null) {
+				marker = L.marker([
+					parseFloat(doc.partner_coordinates.latitude),
+					parseFloat(doc.partner_coordinates.longitude),
+				]);
+			}
+			// TODO HAVE THIS BE CONSISTENT ACROSS EVERYTHING
+			getDivContent(doc.partner_name).then((div) => {
+				marker.bindPopup(div);
+				results.addLayer(marker);
+			});
+		});
+	})
+	.catch((error) => {
+		console.error('Error getting documents: ', error);
+	});
 
-  
-searchControl.on("results", function (data) {
-  results.clearLayers();
-  for (var i = data.results.length - 1; i >= 0; i--) {
-    var marker = L.marker(data.results[i].latlng);
-    console.log(marker);
-    results.addLayer(marker);
-  }
+searchControl.on('results', function (data) {
+	results.clearLayers();
+	for (var i = data.results.length - 1; i >= 0; i--) {
+		var marker = L.marker(data.results[i].latlng);
+		console.log(marker);
+		results.addLayer(marker);
+	}
 });
 
+// This function defines the event for when the user clicks anywhere on the map
 function onMapClick(e) {
 	const lat = e.latlng.lat;
 	const lng = e.latlng.lng;
