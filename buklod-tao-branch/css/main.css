@@ -160,7 +160,6 @@ button.container {
   gap: 8px;
   align-self: stretch;
   border: 0;
-  background-color: #e4e4e4;
 }
 
 button.label-font {
@@ -174,7 +173,6 @@ button.label-font {
   line-height: normal;
   color: #3D97AF;
   letter-spacing: 0.8px;
-  background-color: #e4e4e4;
 }
 
 button:hover {
@@ -285,11 +283,11 @@ h1.entries {
 }
 /* CSS for forms modal*/
 .form-modal {
-  display: none;
+  align-items: center;
   position: fixed;
   z-index: 9999;
   top: 0;
-  left: 5%;
+  left: 0;
   width: 100%; /* Adjust the width of the modal as needed */
   height: 100%; /* Adjust the height of the modal as needed */
   justify-content: center;
@@ -298,21 +296,19 @@ h1.entries {
 }
 
 .form-modal-header {
-  margin-left: 25%;
+  margin-left: 30%;
   margin-top: 5%;
   padding: 10px 24px;
   width: 100%;
-  max-width: 600px;
+  max-width: 816px;
   background-color: #fcfcfc;
 }
 
 .form-modal-content {
-  margin-top: -10px;
-  margin-left: 25%;
+  margin-left: 30%;
   padding: 24px 32px;
   width: 100%;
-  max-width: 584px;
-  border-radius: 8px;
+  max-width: 800px;
   background-color: #fcfcfc;
   font-family: Hind;
   font-size: 16px;
@@ -378,6 +374,21 @@ h1.entries {
   letter-spacing: 0.32px;
   margin-bottom: -16px;
 }
+
+.close-form {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-form:hover,
+.close-form:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .close {
   color: #aaaaaa;
   float: right;

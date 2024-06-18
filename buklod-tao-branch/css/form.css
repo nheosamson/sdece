@@ -5,18 +5,53 @@ div.container {
     width: 50%; 
 }
 
+/* container for each input field */
 div.input_container {
-    align-self: center;
     margin-top: 8px;
     margin-bottom: 16px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
+/* form header */
+.form-header {
+    font-family: "Montserrat";
+    font-weight: 900;
+    font-size: 32px;
+    color: #387181;
+}
+
+/* form sub-headers */
+.sub-header {
+    font-family: "Montserrat";
+    font-weight: 900;
+    font-size: 20px;
+    color: #3D97AF;
+}
+
+/* input field labels */
+label.form {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 20px;
+    color: #979797;
+}
+
+/* specific to disaster risk level (uses both selects and inputs) labels */
+label.disaster-form {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #979797;
+    width: 100px;
+}
+
+/* CSS for select elements */
 select.attribs {
     display: block; 
-    margin-bottom: 10px;
-    width: 100px;
+    width: 179px;
+    height: 46px;
     padding: 0px;
     box-sizing: border-box;
     font-family: 'Hind'; font-size: 20px;
@@ -26,11 +61,11 @@ select.attribs {
     border-radius: 3px;
 }
 
+/* CSS for input elements */
 input.attribs {
     display: block; 
-    margin-bottom: 10px;
-    width: 300px;
-    padding: 0px;
+    width: 400px;
+    height: 46px;
     box-sizing: border-box;
     font-family: 'Hind'; font-size: 20px;
     border-style: double;
@@ -39,79 +74,62 @@ input.attribs {
     border-radius: 3px;
 }
 
+/* when typing in an input field */
 input.attribs:focus {
     outline: none;
     border-bottom: 3px solid #3D97AF;
 }
 
+/* for placeholders in input fields */
 input.attribs::placeholder {
     font-family: "Source Sans Pro";
     font-style: italic;
 }
 
+/* container for Save and Delete buttons */
 .button-container {
     width: 100%;
     text-align: center;
 }
 
-button.clear {
-    background-color: white;
-    color: red;
-    border-width: 4px;
-    border-radius: 10px;
-    border-color: red;
-}
-
-button.clear:hover {
-    background-color: #F8F8F8;
-}
-
-button.confirm {
-    background-color: #49A2BB;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 10px;
-}
-
-button.confirm:hover {
-    background-color: #3698B4;   
-}
-
+/* CSS for buttons */
 button.form {
     align-items: center;
     width: 100%;
     height: 48px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat";
+    font-size: 24px;
     font-weight: 900;
+    line-height: 110%;
+    letter-spacing: 2px;
     cursor: pointer;
     outline: none;
 }
 
-label.form {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #7DAAB7;
+/* specific to delete button */
+button.clear {
+    background-color: white;
+    color: red;
+    border-width: 1px;
+    border-radius: 8px;
+    border-color: red;
 }
 
-label.disaster-form {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #7DAAB7;
-    width: 100px;
+/* when hovering cursor over delete button */
+button.clear:hover {
+    background-color: #F8F8F8;
+
 }
 
-.form-header {
-    font-family: "Montserrat";
-    font-weight: 900;
-    font-size: 24px;
-    color: #004153;
+/* specific to save button */
+button.confirm {
+    background-color: #49A2BB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
 }
 
-.sub-header {
-    font-family: "Montserrat";
-    font-weight: 900;
-    font-size: 20px;
-    color: #10abd5;
+/* when hovering over save button */
+button.confirm:hover {
+    background-color: #3698B4;      
 }
