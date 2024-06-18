@@ -1,5 +1,6 @@
-import { getPartnersArray, addEntry } from "./firestore.js";
-import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB_RULES_AND_DATA } from "/firestore_UNIV.js";
+
+// import { getPartnersArray, addEntry } from "./firestore.js";
+import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
 import { getDivContent, searchLocation, panLocation } from "/index_UNIV.js";
 import {
   getFirestore,
@@ -9,7 +10,15 @@ import {
 
 // const db = getFirestore();
 setCollection("buklod-official");
-var col_ref = getCollection();
+var colRef = getCollection();
+
+//list down all documents under the collection in console.log
+const querySnapshot = await getDocs(colRef);
+console.log(querySnapshot);
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  console.log(doc.id, " => ", doc.data());
+});
 
 var map = L.map("map").setView([14.673, 121.11215], 21);
 
