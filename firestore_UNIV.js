@@ -54,29 +54,29 @@ export const DB_RULES_AND_DATA = [
 		//     ["field1", ... ,"fieldN"] ]; 
     ["buklod-official", "household_name", 
 	    [
-        "contact_number",
-        "earthquake_risk",
-        "fire_risk",
-        "flood_risk",
-        "household_address",
-        "household_material",
-        "household_name",
-        "household_phase",
-        "is_hoa_noa",
-        "landslide_risk",
-        "location_coordinates",
-        "location_link",
-        "nearest_evac",
-        "number_minors",
-        "number_pregnant",
-        "number_pwd",
-        "number_residents",
-        "number_seniors",
-        "number_sick",
-        "residency_status",
-        "sickness_present",
-        "status",
-        "storm_risk", ],
+            "household_name",
+            "contact_number",
+            "number_residents",
+            "number_minors",
+            "number_seniors",
+            "number_pwd",
+            "number_sick",
+            "number_pregnant",
+            "sickness_present",
+            "residency_status",
+            "is_hoa_noa",
+            "location_link",
+            "location_coordinates",
+            "household_address",
+            "household_material",
+            "flood_risk",
+            "storm_risk",
+            "fire_risk",
+            "earthquake_risk",
+            "landslide_risk",
+            "nearest_evac",
+            "household_phase",
+        ]
     ],
     ["sdece-official", "partner_name", 
 	    [
@@ -194,7 +194,6 @@ export function getDocByID(docId) {
                 }
             );
         }
-        
     }    
 }
 

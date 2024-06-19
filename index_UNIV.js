@@ -11,8 +11,13 @@ export function getDivContent(name) {
           // Insert the partner details into the div with class "partner-contact"
           for(let rule of DB_RULES_AND_DATA){
             if(getCollection().id === rule[0]){    
-              div_content += `<div class="partner-contact"> <div class="partner-label"> partner-label </div>`;
+              div_content += `<div class="partner-contact"> <div class="partner-label"> ${doc.get(rule[1])} </div>`;
               for(let i = 0; i < rule[2].length; i++){
+                if(rule[2][i].includes("coordinates")){ 
+                  console.log("hi");
+                  div_content += `<div class="partner-activity"> ${readyField(rule[2][i])}: ${doc.get(rule[2][i]).latitude + " + " + doc.get(rule[2][i]).longitude}`;
+                  continue 
+                }
                 div_content += `<div class="partner-activity"> ${readyField(rule[2][i])}: ${doc.get(rule[2][i])}`;
               }
               div_content += `</div>`;
