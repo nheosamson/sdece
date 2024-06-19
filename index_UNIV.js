@@ -20,9 +20,9 @@ export function getDivContent(name) {
             if(getCollection().id === rule[0]){    
               div_content += `<div class="partner-contact"> <div class="partner-label"> ${doc.get(rule[1])} </div>`;
               for(let i = 0; i < rule[2].length; i++){
-                if(rule[2][i].includes("coordinates")){ 
-                  console.log("hi");
-                  div_content += `<div class="partner-activity"> ${readyField(rule[2][i])}: ${doc.get(rule[2][i]).latitude + " + " + doc.get(rule[2][i]).longitude}`;
+                if(rule[2][i].includes("coordinates")){
+                  div_content += `<div class="partner-activity"> ${readyField(rule[2][i])}: ${doc.get(rule[2][i]).latitude 
+                    + " + " + doc.get(rule[2][i]).longitude}`;
                   continue 
                 }
                 div_content += `<div class="partner-activity"> ${readyField(rule[2][i])}: ${doc.get(rule[2][i])}`;
@@ -40,7 +40,14 @@ export function getDivContent(name) {
       }
     });
   }
- 
+
+export function panLocation(doc, map) {
+	doc = doc.data();
+	var lat = doc.partner_coordinates._lat;
+	var long = doc.partner_coordinates._long;
+	map.panTo(new L.LatLng(lat, long));
+}
+
 export function searchLocation(name, map) {
 	console.log('Calling searchLocation() on ' + name);
 	getDocIdByPartnerName(name).then((docId) => {
@@ -50,37 +57,6 @@ export function searchLocation(name, map) {
 	});
 }
 
-// function onMapClick(e) {
-//   const lat = e.latlng.lat;
-//   const lng = e.latlng.lng;
-
-//   var popupContent = `
-//       <div class="partner-geolocation">
-//             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-//             <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C11.337 11.5 10.7011 11.2366 10.2322 10.7678C9.76339 10.2989 9.5 9.66304 9.5 9C9.5 8.33696 9.76339 7.70107 10.2322 7.23223C10.7011 6.76339 11.337 6.5 12 6.5C12.663 6.5 13.2989 6.76339 13.7678 7.23223C14.2366 7.70107 14.5 8.33696 14.5 9C14.5 9.66304 14.2366 10.2989 13.7678 10.7678C13.2989 11.2366 12.663 11.5 12 11.5Z" fill="#91C9DB"/>
-//             </svg>
-//             ${lat} + ${lng}
-//             <br>
-//         </div>
-//     <button class="addButton" data-lat="${lat}" data-lng="${lng}">Add Location</button>
-//   `;
-
-//   popup.setLatLng(e.latlng).setContent(popupContent).openOn(map);
-
-//   var addButton = document.querySelector(".addButton");
-//   addButton.addEventListener("click", function () {
-//     const lat = this.getAttribute("data-lat");
-//     const lng = this.getAttribute("data-lng");
-
-//     window.open(
-//       `addloc.html?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(
-//         lng
-//       )}`,
-//       "_blank"
-//     );
-//   });
-// }
-// ////
 
 // Utility Function for Front-end (remove underscores from a string)
 export function removeUnderscoresFromField(field) {
