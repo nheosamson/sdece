@@ -5,8 +5,9 @@ import {
 	getCollection,
 } from '/firestore_UNIV.js';
 
-import { map } from "./buklod-tao-branch/js/index.js";
+
 /// Will need to change how we do this if we ever restructure again
+export var map = L.map("map").setView([0, 0], 21);
 
 // Takes in a name to determine all field values which should be displayed
 // Current Issue: it doesn't display all the added things, could be due to the async nature of these functions
@@ -43,10 +44,19 @@ export function getDivContent(name) {
   }
 
 function panLocation(doc, map) {
-	doc = doc.data();
-	var lat = doc.location_coordinates._lat;
-	var long = doc.location_coordinates._long;
-	map.panTo(new L.LatLng(lat, long));
+  for(let rule of DB_RULES_AND_DATA){
+    if(getCollection().id === rule[0]){
+      var coordinates;
+      for(let i = 0; i < rule[2].length; i++){
+        if(rule[2][i].includes("coordinates")){
+          coordinates = doc.get(rule[2][i]);
+          console.log(coordinates);
+	        map.panTo(new L.LatLng(coordinates.latitude, coordinates.longitude));
+          break;
+        }
+      }
+    }
+  }
 }
 
 function searchLocation(name, map) {

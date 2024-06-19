@@ -6,7 +6,7 @@ import {
 	getCollection,
 	DB,
 } from '/firestore_UNIV.js';
-import { getDivContent, addListeners } from '/index_UNIV.js';
+import { getDivContent, addListeners, map } from '/index_UNIV.js';
 import {
 	getFirestore,
 	collection,
@@ -22,7 +22,7 @@ import {
 
 var colRef = getCollection();
 
-export var map = L.map('map').setView([14.651, 121.052], 13);
+map.panTo(new L.LatLng(14.651, 121.052));
 
 // //list down all documents under the collection in console.log
 // const querySnapshot = await getDocs(colRef);

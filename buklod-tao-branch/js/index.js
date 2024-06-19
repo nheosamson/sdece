@@ -1,7 +1,7 @@
 
 import {  } from "./firestore.js";
 import { getDocIdByPartnerName, getDocByID, setCollection, getCollection, DB } from "/firestore_UNIV.js";
-import { getDivContent, addListeners } from "/index_UNIV.js";
+import { getDivContent, addListeners, map } from "/index_UNIV.js";
 import {
   getFirestore,
   collection,
@@ -10,8 +10,7 @@ import {
 
 var colRef = getCollection();
 
-export var map = L.map("map").setView([14.673, 121.11215], 21);
-
+map.panTo(new L.LatLng(14.673, 121.11215));
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
