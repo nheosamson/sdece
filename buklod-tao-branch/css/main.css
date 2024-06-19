@@ -25,7 +25,7 @@ body {
   height: 80px;
   width: 100%;
   display: flex;
-  position: absolute;
+  position: fixed;
   z-index: 2;
   justify-content: flex-end;
 }
@@ -33,7 +33,7 @@ body {
 .sidenav {
   flex: 0 0 20%;
   display: flex;
-  position: absolute;
+  position: fixed;
   width: 480px;
   height: 100%;
   background-color: #F6F6F6;
@@ -413,12 +413,13 @@ h1.entries {
   color: #387181;
   text-overflow: ellipsis;
   font-family: Hind;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   display: flex;
   align-items: center;
   flex-shrink: 5;
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.1px;
 }
 
 .leaflet-buttons {

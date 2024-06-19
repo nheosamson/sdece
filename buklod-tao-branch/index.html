@@ -248,9 +248,9 @@
   <!--Side menu: where the add location function, search bar, and list entries-->
   <div class="main">
     <div class="sidenav">
-      <!--Log out buttons-->
+      <!--Search Bar-->
       <div class="buttons">
-        <input class="search-bar" type="search" placeholder="Search... ">
+        <input class="search-bar" type="search" placeholder="Search... " oninput="searchEntries()">
       </div>
       <button class="container label-font" id="addHousehold" name="addHousehold">+ Add a Household</button>
         <!--<button class="container label-font" href="#">
@@ -297,12 +297,21 @@
     formModal.style.display = "none";
   }
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == formModal) {
-      formModal.style.display = "none";
+  // Allows the user to search for entries by filtering the data entries for every key typed in
+    function searchEntries() {
+      var input = document.querySelector('.search-bar').value.toUpperCase();
+      var ul = document.getElementById("locationList");
+      var li = ul.getElementsByTagName('li');
+      for (var i = 0; i < li.length; i++) {
+        var a = li[i].getElementsByTagName("a")[0];
+        var txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(input) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
     }
-  }
   </script>
 </body>
 

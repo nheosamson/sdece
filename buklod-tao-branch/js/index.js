@@ -33,7 +33,6 @@ getDocs(colRef)
       var popupContent = `
       <div class="leaflet-popup-container">
       <h2 class="partner-header">${doc.household_name}</h2>          
-      <div class="partner-contact">${doc.address} ${doc.phase}</div>
         `;
       marker.bindPopup(popupContent);
       results.addLayer(marker);
@@ -49,8 +48,7 @@ function searchLocation(doc) {
     .setLatLng([doc.latitude + 0.00015, doc.longitude] )
     .setContent(`
     <div class="leaflet-popup-container">
-    <h2 class="partner-header">${doc.household_name}</h2>          
-    <div class="partner-contact">${doc.address} ${doc.phase}</div>
+    <h2 class="partner-header">${doc.household_name}</h2>         
     `)
     .openOn(map);
 
