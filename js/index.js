@@ -6,7 +6,7 @@ import {
 	getCollection,
 	DB,
 } from '/firestore_UNIV.js';
-import { getDivContent } from '/index_UNIV.js';
+import { getDivContent, addListeners } from '/index_UNIV.js';
 import {
 	getFirestore,
 	collection,
@@ -65,6 +65,8 @@ getDocs(colRef)
 	.catch((error) => {
 		console.error('Error getting documents: ', error);
 	});
+
+addListeners();
 
 searchControl.on('results', function (data) {
 	results.clearLayers();
@@ -160,3 +162,4 @@ function testFunction() {
 	m.classList.remove('hidden');
 	m.classList.add('flex');
 }
+

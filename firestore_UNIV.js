@@ -268,9 +268,6 @@ export function addEntry(inp_obj){
     }
 }
 
-
-
-
 export function editEntry(inp_array, docId) {
 	console.log('edit entry with id ' + docId);
 

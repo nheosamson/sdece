@@ -5,7 +5,8 @@ import {
 	getCollection,
 } from '/firestore_UNIV.js';
 
-import { map } from './js/index.js';
+import { map } from "./buklod-tao-branch/js/index.js";
+/// Will need to change how we do this if we ever restructure again
 
 // Takes in a name to determine all field values which should be displayed
 // Current Issue: it doesn't display all the added things, could be due to the async nature of these functions
@@ -41,14 +42,14 @@ export function getDivContent(name) {
     });
   }
 
-export function panLocation(doc, map) {
+function panLocation(doc, map) {
 	doc = doc.data();
-	var lat = doc.partner_coordinates._lat;
-	var long = doc.partner_coordinates._long;
+	var lat = doc.location_coordinates._lat;
+	var long = doc.location_coordinates._long;
 	map.panTo(new L.LatLng(lat, long));
 }
 
-export function searchLocation(name, map) {
+function searchLocation(name, map) {
 	console.log('Calling searchLocation() on ' + name);
 	getDocIdByPartnerName(name).then((docId) => {
 		getDocByID(docId).then((doc) => {
@@ -82,7 +83,11 @@ export function readyField(field) {
 }
 
 // Listeners
-document.getElementById('locationList').addEventListener('click', (event) => {
-	searchLocation(event.target.innerHTML, map);
-	console.log('Calling searchLocation()');
-});
+export function addListeners(){
+  var locationList = document.getElementById(`locationList`);
+  locationList.addEventListener('click', (event) => {
+    searchLocation(event.target.innerHTML, map);
+    console.log('Calling searchLocation()');
+  });
+  console.log("added");
+}
