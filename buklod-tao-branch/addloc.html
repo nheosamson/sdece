@@ -10,79 +10,18 @@
             setCollection("buklod-official");
             document.getElementById("submit_form").addEventListener("click", handleFormSubmit_v2);
 
-            /*function handleFormSubmit() {
-                const urlParams = new URLSearchParams(window.location.search);
-                var latitude = urlParams.get('lat');
-                var longitude = urlParams.get('lng');
-                var partner = document.getElementById("partner").value;
-                var partnerContactPerson = document.getElementById("partner_contact-person").value;
-                var organization = document.getElementById("organization").value;
-                var natureOfActivity = document.getElementById("nature_of_act").value;
-                var datesOfPartnership = document.getElementById("dates_of_partnership").value;
-                var ateneoOffice = document.getElementById("ateneo_office").value;
-                var ateneoContactPerson = document.getElementById("ateneo_contact-person").value;
-                var ateneoContactEmail = document.getElementById("ateneo_contact-email").value;
-                
-                // Parse the date input as a whole string
-                var dateParts = datesOfPartnership.split("-");
-                var year = dateParts[0];
-                var month = dateParts[1];
-                var day = dateParts[2];
-                var parsedDatesOfPartnership = year + "-" + month + "-" + day;
-
-                addLocation(
-                    partner, 
-                    natureOfActivity,
-                    ateneoContactPerson,
-                    ateneoContactEmail,
-                    ateneoOffice,
-                    organization,
-                    partnerContactPerson,
-                    parsedDatesOfPartnership,
-                    latitude,
-                    longitude
-                );
-                
-                document.getElementById("partner").value = "";
-                document.getElementById("partner_contact-person").value = "";
-                document.getElementById("organization").value = "";
-                document.getElementById("nature_of_act").value = "";
-                document.getElementById("dates_of_partnership").value = "";
-                document.getElementById("ateneo_office").value = "";
-                document.getElementById("ateneo_contact-person").value = "";
-                document.getElementById("ateneo_contact-email").value = "";
-                
-                // Display a success message
-                alert("Form submitted successfully!");
-            } */
-
             function handleFormSubmit_v2(){
                 console.log("clicked");
                 var collatedInput = {};
 
-                //var latitude = urlParams.get('lat');
-                //var longitude = urlParams.get('lng');
-
                 for(let i = 0; i < BUKLOD_RULES[2].length; i++){
+                    //BUKLOD_RULES[2] are just the field names of each document
                     let q = document.getElementById(BUKLOD_RULES[2][i].value);
                     collatedInput[BUKLOD_RULES[2][i]] = q;
-                }
 
-                /*for(field of BUKLOD_RULES[2]){
-                    let q = null;
-                    if(field == "location_coordinates"){
-                        q = "[" + latitude + ", " + longitude + "]";
-                    }
-                    else if (field == "location_link"){
-                        let link_start = "https://www.openstreetmap.org/#map=16/";
-                        q = linkstart + latitude + "/" + longitude;
-                    }
-                    else {
-                        q = document.getElementById(BUKLOD_RULES[2][i].value);
-                    }
-                    console.log(q);
-                    collatedInput[BUKLOD_RULES[2][i]] = q;
-                } */
+                    // this is where data validation will happen
+                    // add the if-else statements of edge cases here
+                }
 
                 console.log(collatedInput);
                 // This actually works but it needs some data validation

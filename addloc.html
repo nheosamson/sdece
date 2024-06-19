@@ -30,8 +30,12 @@
                 var collatedInput = {};
 
                 for(let i = 0; i < SDECE_RULES[2].length; i++){
+                    //SDECE_RULES[2] are just the field names of each document
                     let q = document.getElementById(SDECE_RULES[2][i].value);
                     collatedInput[SDECE_RULES[2][i]] = q;
+
+                    // this is where data validation will happen
+                    // add the if-else statements of edge cases here
                 }
 
                 console.log(collatedInput);

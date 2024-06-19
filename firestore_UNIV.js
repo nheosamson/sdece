@@ -199,7 +199,7 @@ export function getDocByID(docId) {
     }    
 }
 
-export function addEntry(inp_array){ //addDoc is a builtin function
+export function addEntry(inp_obj){
     console.log("add Entry");
 
     for (let rule of DB_RULES_AND_DATA){
