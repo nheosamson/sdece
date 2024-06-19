@@ -20,8 +20,7 @@ export function getDivContent(name) {
             if(getCollection().id === rule[0]){    
               div_content += `<div class="partner-contact"> <div class="partner-label"> ${doc.get(rule[1])} </div>`;
               for(let i = 0; i < rule[2].length; i++){
-                if(rule[2][i].includes("coordinates")){ 
-                  console.log("hi");
+                if(rule[2][i].includes("coordinates")){
                   div_content += `<div class="partner-activity"> ${readyField(rule[2][i])}: ${doc.get(rule[2][i]).latitude 
                     + " + " + doc.get(rule[2][i]).longitude}`;
                   continue 

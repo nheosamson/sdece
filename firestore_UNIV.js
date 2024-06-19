@@ -50,60 +50,119 @@ export let partnersArray = [];
 
 // General format of the rule engine
 export const DB_RULES_AND_DATA = [
-    // ["collection_name", "identifier", 
-		//     ["field1", ... ,"fieldN"] ]; 
-    ["buklod-official", "household_name", 
-	    [
-            "contact_number",
-            "number_residents",
-            "number_minors",
-            "number_seniors",
-            "number_pwd",
-            "number_sick",
-            "number_pregnant",
-            "sickness_present",
-            "residency_status",
-            "is_hoa_noa",
-            "location_link",
-            "location_coordinates",
-            "household_address",
-            "household_material",
-            "flood_risk",
-            "storm_risk",
-            "fire_risk",
-            "earthquake_risk",
-            "landslide_risk",
-            "nearest_evac",
-            "household_phase",
-        ]
-    ],
-    ["sdece-official", "partner_name", 
-	    [  
-            "partner_city",
-            "partner_coordinates",
-            "partner_contact",
-            "partner_number",
-            "partner_email",
-            "activity_date",
-            "activity_nature",
-            "activity_name",
-            "organization_unit",
-            "admu_office",
-            "admu_contact",
-            "admu_email",
-	    ],
-    ]
+	// ["collection_name", "identifier",
+	//     ["field1", ... ,"fieldN"] ];
+	[
+		'buklod-official',
+		'household_name',
+		[
+			'contact_number',
+			'earthquake_risk',
+			'fire_risk',
+			'flood_risk',
+			'household_address',
+			'household_material',
+			'household_name',
+			'household_phase',
+			'is_hoa_noa',
+			'landslide_risk',
+			'location_coordinates',
+			'location_link',
+			'nearest_evac',
+			'number_minors',
+			'number_pregnant',
+			'number_pwd',
+			'number_residents',
+			'number_seniors',
+			'number_sick',
+			'residency_status',
+			'sickness_present',
+			'status',
+			'storm_risk',
+		],
+	],
+	[
+		'buklod-official-TEST',
+		'household_name',
+		[
+			'contact_number',
+			'earthquake_risk',
+			'fire_risk',
+			'flood_risk',
+			'household_address',
+			'household_material',
+			'household_name',
+			'household_phase',
+			'is_hoa_noa',
+			'landslide_risk',
+			'location_coordinates',
+			'location_link',
+			'nearest_evac',
+			'number_minors',
+			'number_pregnant',
+			'number_pwd',
+			'number_residents',
+			'number_seniors',
+			'number_sick',
+			'residency_status',
+			'sickness_present',
+			'status',
+			'storm_risk',
+		],
+	],
+	[
+		'sdece-official',
+		'partner_name',
+		[
+			'activity_date',
+			'activity_name',
+			'activity_nature',
+			'additional_partnership',
+			'admu_contact',
+			'admu_email',
+			'admu_office',
+			'organization_unit',
+			'partner_city',
+			'partner_contact',
+			'partner_coordinates',
+			'partner_email',
+			'partner_name',
+			'partner_number',
+		],
+	],
+	[
+		'sdece-official-TEST',
+		'partner_name',
+		[
+			'activity_date',
+			'activity_name',
+			'activity_nature',
+			'additional_partnership',
+			'admu_contact',
+			'admu_email',
+			'admu_office',
+			'organization_unit',
+			'partner_city',
+			'partner_contact',
+			'partner_coordinates',
+			'partner_email',
+			'partner_name',
+			'partner_number',
+		],
+	],
 ];
 
-export function setCollection(collection_name) {
-	for (let rule of DB_RULES_AND_DATA) {
-		console.log('rule[0]: ' + rule[0]);
-		if (rule[0] === collection_name) {
-			console.log('IS EQUAL');
-			col_ref = collection(DB, collection_name);
-		}
-	}
+export const BUKLOD_RULES = DB_RULES_AND_DATA[0];
+export const SDECE_RULES = DB_RULES_AND_DATA[1];
 
+export function setCollection(collection_name){
+    for(let rule of DB_RULES_AND_DATA ){
+        console.log("rule[0]: " + rule[0]);
+        if (rule[0] === collection_name){
+            console.log("IS EQUAL");
+            col_ref = collection( DB, collection_name );
+        }
+    }
 	console.log(col_ref);
 }
 
@@ -189,27 +248,28 @@ export function getDocByID(docId) {
     }    
 }
 
-export function addEntry(inp_array) {
-	//addDoc is a builtin function
-	console.log('add Entry');
+export function addEntry(inp_obj){
+    console.log("add Entry");
 
-	for (let rule of DB_RULES_AND_DATA) {
-		if (rule[0] === col_ref.id) {
-			let input = {}; // contents depend on the rule engine
-			for (let i = 0; i < inp_array.length; i++) {
-				input[rule[2][i]] = inp_array[i];
-			}
-			addDoc(col_ref, input)
-				.then((docRef) => {
-					console.log('Document written with ID: ', docRef.id);
-				})
-				.catch((error) => {
-					console.error('Error adding document: ', error);
-				});
-			break;
-		}
-	}
+    for (let rule of DB_RULES_AND_DATA){
+        if(rule[0] === col_ref.id){
+            let input = {}; // contents depend on the rule engine
+            for(let i = 0; i < Object.keys(inp_obj).length; i++){
+                input[rule[2][i]] = inp_obj[rule[2][i]];
+            }
+            addDoc(col_ref, input).then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+              })
+              .catch((error) => {
+                console.error("Error adding document: ", error);
+              });
+            break;
+        }
+    }
 }
+
+
+
 
 export function editEntry(inp_array, docId) {
 	console.log('edit entry with id ' + docId);
