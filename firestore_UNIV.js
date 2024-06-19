@@ -54,7 +54,6 @@ export const DB_RULES_AND_DATA = [
 		//     ["field1", ... ,"fieldN"] ]; 
     ["buklod-official", "household_name", 
 	    [
-            "household_name",
             "contact_number",
             "number_residents",
             "number_minors",
@@ -79,23 +78,19 @@ export const DB_RULES_AND_DATA = [
         ]
     ],
     ["sdece-official", "partner_name", 
-	    [
-		    "partner_latitude",
-		    "partner_longitude",
-		    "partner_location",
-		    "partner_city",
-		    "partner_name",
-		    "additional_partnership",
-		    "partner_contact",
-		    "partner_number",
-		    "partner_email",
-		    "activity_date",
-		    "activity_nature",
-		    "activity_name",
-		    "organization_unit",
-		    "admu_office",
-		    "admu_contact",
-		    "admu_email",
+	    [  
+            "partner_city",
+            "partner_coordinates",
+            "partner_contact",
+            "partner_number",
+            "partner_email",
+            "activity_date",
+            "activity_nature",
+            "activity_name",
+            "organization_unit",
+            "admu_office",
+            "admu_contact",
+            "admu_email",
 	    ],
     ]
 	    
