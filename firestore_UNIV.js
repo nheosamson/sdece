@@ -96,6 +96,9 @@ export const DB_RULES_AND_DATA = [
 	    
 ];
 
+export const BUKLOD_RULES = DB_RULES_AND_DATA[0];
+export const SDECE_RULES = DB_RULES_AND_DATA[1];
+
 export function setCollection(collection_name){
     
     for(let rule of DB_RULES_AND_DATA ){
@@ -192,14 +195,14 @@ export function getDocByID(docId) {
     }    
 }
 
-export function addEntry(inp_array){ //addDoc is a builtin function
+export function addEntry(inp_obj){ //addDoc is a builtin function
     console.log("add Entry");
 
     for (let rule of DB_RULES_AND_DATA){
         if(rule[0] === col_ref.id){
             let input = {}; // contents depend on the rule engine
-            for(let i = 0; i < inp_array.length; i++){
-                input[rule[2][i]] = inp_array[i];
+            for(let i = 0; i < Object.keys(inp_obj).length; i++){
+                input[rule[2][i]] = inp_obj[rule[2][i]];
             }
             addDoc(col_ref, input).then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);
