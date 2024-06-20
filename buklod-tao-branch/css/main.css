@@ -150,7 +150,7 @@ li {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   margin-right: 50px;
-  filter: drop-shadow(0 0 0.75rem #2F2F2F);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
   justify-content: space-between;
 }
 
@@ -174,7 +174,7 @@ button.label-font {
   line-height: normal;
   color: #3D97AF;
   letter-spacing: 0.8px;
-  background-color: #e4e4e4;
+  background-color: #F6F6F6;
 }
 
 button:hover {
@@ -184,7 +184,7 @@ button:hover {
 
 div.buttons {
   display: flex;
-  padding: 24px;
+  padding: 20px;
   flex-direction: column;
   align-items: flex-start;
   gap: 18px;
@@ -322,10 +322,12 @@ h1.entries {
 }
 
 /* CSS for the entry modal */
+
+/* modal containers */
 .modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 9900;
   top: 10%;
   left: 25%;
   width: 100%; /* Adjust the width of the modal as needed */
@@ -337,51 +339,113 @@ h1.entries {
 }
 
 .modal-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
   margin-left: 25%;
   margin-top: 5%;
-  padding: 10px 24px;
+  padding: 0px 24px;
   width: 100%;
+  height: 64px;
   background-color: #fcfcfc;
+  z-index: 9901;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2); 
 }
 
 .modal-content {
-  margin-top: -10px;
+  margin-top: 0px;
   margin-left: 25%;
-  padding: 24px 32px;
-  width: 96.3%;
+  padding: 10px 24px;
+  width: 100%;
   background-color: #fcfcfc;
   font-family: Hind;
   font-size: 16px;
   font-style: normal;
   height: calc(80% - 140px);
   overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.modal-footer {
+  margin-left: 25%;
+  padding: 24px;
+  width: 100%;
+  height: 24px;
+  background-color: #fcfcfc;
+  position: relative;
+  z-index: 9901;
+  box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.2); 
+}
+
+.modal-line {
+  margin-top: auto;
+  display: flex; 
+  justify-content: space-between;
+}
+
+/* modal text */
+.modal-label {
+  font-family: 'Montserrat';
+  font-size: 16px;
+  color: #000;
+  font-weight: 900;
+  font-style: normal;
+  letter-spacing: 2%;
 }
 
 .modal-name {
-  color: #3d97af;
+  color: #387181;
   font-family: Montserrat;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 900;
-  line-height: 110%;
   letter-spacing: 0.48px;
-  margin-bottom: 24px;
 }
 
-.modal-address {
+.modal-button {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #fcfcfc;
+}
+
+.modal-text {
   color: #a0a0a0;
   font-family: Hind;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 120%;
   letter-spacing: 0.32px;
-  margin-bottom: -16px;
+  line-height: 100%;
+  position: relative;
+  top: -10px;
 }
+
+button.collapsible {
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  border: 0;
+  background-color: #fcfcfc;
+  width: 100%;
+  height: 50px;
+  color: #3D97AF;
+  font-family: 'Montserrat';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+/* closing modal */
 .close {
   color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  font-size: 40px;
   font-weight: bold;
 }
 
