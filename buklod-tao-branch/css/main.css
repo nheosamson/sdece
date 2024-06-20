@@ -49,6 +49,7 @@ body {
   align-items: center;
 }
 
+/* search bar itself */
 .search-bar {
   height: 40px;
   padding: 8px 32px;
@@ -66,6 +67,7 @@ body {
   justify-content: right;
 }
 
+/* search bar when typing something in */
 .search-bar:focus {
   background-image: none;
 }
@@ -120,19 +122,7 @@ li {
   color: #387181; /* Calypso */
 }
 
-/*.logout {
-  display: flex;
-  padding: 10px 10px;
-  z-index: 5;
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  align-items: center;
-  gap: 8px;
-  background-color: white;
-  border-radius: 8px;
-}*/
-
+/* logout button */
 .button-logout {
   font-family: Montserrat;
   font-size: 20px;
@@ -190,6 +180,7 @@ div.buttons {
   border-bottom: 0px solid #cbd5e0;
 }
 
+/* magnifying glass icon */
 .search-button {
   background-image: url("./img/search-icon.png");
   background-repeat: no-repeat;
@@ -201,6 +192,7 @@ div.buttons {
   height: 32px;
 }
 
+/* entries in household list */
 a.accordion {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -281,15 +273,16 @@ h1.entries {
   font-weight: 600;
   line-height: normal;
 }
-/* CSS for forms modal*/
+
+/* CSS for "Add Household" modal*/
 .form-modal {
   align-items: center;
   position: fixed;
   z-index: 9999;
   top: 0;
   left: 0;
-  width: 100%; /* Adjust the width of the modal as needed */
-  height: 100%; /* Adjust the height of the modal as needed */
+  width: 100%;
+  height: 100%;
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
@@ -317,7 +310,7 @@ h1.entries {
   overflow-y: auto;
 }
 
-/* CSS for the entry modal */
+/* CSS for the household entry modals */
 .modal {
   display: none;
   position: fixed;
