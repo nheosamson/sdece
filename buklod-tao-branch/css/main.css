@@ -238,7 +238,7 @@ a.accordion {
   font-family: Montserrat;
   font-size: 18px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 110%;
   letter-spacing: 0.36px;
 }
@@ -276,8 +276,9 @@ h1.entries {
 
 /* CSS for "Add Household" modal*/
 .form-modal {
+  background-color:rgb(107, 106, 106, 0.4);
   align-items: center;
-  position: fixed;
+  position: absolute;
   z-index: 9999;
   top: 0;
   left: 0;
@@ -289,25 +290,36 @@ h1.entries {
 }
 
 .form-modal-header {
-  margin-left: 30%;
-  margin-top: 5%;
-  padding: 10px 24px;
-  width: 100%;
-  max-width: 816px;
+  margin-left: 23%;
+  margin-top: 2%;
+  padding: 1px 32px;
+  max-width: 50%;
   background-color: #fcfcfc;
+  border-radius: 8px 8px 0px 0px;
 }
 
 .form-modal-content {
-  margin-left: 30%;
-  padding: 24px 32px;
-  width: 100%;
-  max-width: 800px;
+  margin-left: 23%;
+  padding: 1px 32px;
+  padding-bottom: 32px;
+  height: calc(97% - 140px);
+  max-width: 50%;
+  max-height: 73%;
   background-color: #fcfcfc;
   font-family: Hind;
   font-size: 16px;
   font-style: normal;
-  height: calc(80% - 140px);
   overflow-y: auto;
+}
+
+/* form footer (empty) */
+.formModalFooter {
+  margin-left: 23%;
+  padding: 0px 32px;
+  height: 8px;
+  max-width: 50%;
+  background-color: #fcfcfc;
+  border-radius: 0px 0px 8px 8px;
 }
 
 /* CSS for the household entry modals */
@@ -371,7 +383,8 @@ h1.entries {
 .close-form {
   color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  padding-top: 15px;
+  font-size: 40px;
   font-weight: bold;
 }
 

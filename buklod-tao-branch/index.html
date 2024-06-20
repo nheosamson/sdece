@@ -42,6 +42,7 @@
   <div class="top-bar">
     <button class="button-logout"><img src="./img/logout.256x256.png" alt="logout" height="15" width="15"> Logout</button>
   </div>
+
   <!--Modals of Entries-->
   <div id="partnerModal" class="modal">
     <!--Modal Header: includes title and address-->
@@ -54,14 +55,15 @@
       <p id="modalContent"></p>
     </div>
   </div>
+
   <!--Modals of forms-->
   <div id="form-modal" class="form-modal" style="display: none;">
-    <div class="formModalBackdrop"></div>
     <!--Modal Header: includes title and address-->
     <div class="form-modal-header">
       <span class="close-form">&times;</span>
       <h1 class="form-header">Add Household</h1>
     </div>
+
     <!--Modal Content: everything else-->
     <div class="form-modal-content">
       <h2 class="sub-header">HOUSEHOLD INFORMATION</h2>
@@ -98,7 +100,7 @@
       </div>
       <br>
       <div class="input_container">
-          <label class="form" for="nearest_evacuation_area">Nearest Evactuation Area</label>
+          <label class="form" for="nearest_evacuation_area">Nearest Evacuation Area</label>
           <input type="text" id="nearest_evacuation_area" name="nearest_evacuation_area" class="attribs" placeholder="">    
       </div>
       <br>
@@ -190,20 +192,25 @@
           </select>
           <input type="email" id="storm" name="storm" class="attribs" placeholder="">
       </div>
+
       <br>
-      <br><br>
       <!-- Save and Delete buttons -->
-      <div>
+      <div class="button-container">
+        <div>
           <!-- Submits contents of the form -->                                               
           <button class="confirm form" type="submit" id="submit_form" name="submit_form">Save</button>   
-      </div>
-      <br>
-      <div>
+        </div>
+        <div>
           <!-- Clears all contents of the form -->
           <button class="clear form">Delete</button>
+        </div>
       </div>
+    </div>
+
+    <!-- Modal Footer: empty space -->
+     <div class="formModalFooter"></div>
   </div>
-  </div>
+  
   <!--Side menu: where the add location function, search bar, and list entries are-->
   <div class="main">
     <div class="sidenav">
@@ -235,7 +242,7 @@
   <script type="module" src="js/index.js"></script>
 
   <!--script for add household modal-->
-  
+
   <script>
   // modal
   var formModal = document.getElementById("form-modal");
