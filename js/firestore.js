@@ -101,6 +101,8 @@ getDocs(colRef)
 			});
 
 			// Adding classes and setting text content
+
+			containerDiv.classList.add('partnerDiv');
 			nameDiv.classList.add(
 				'name',
 				'font-montserrat',

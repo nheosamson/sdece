@@ -380,9 +380,26 @@
         <script type="module" src="js/index.js"></script>
         <script>
             function onSearchInput() {
-                var input = document.getElementById('search-input').value.toLowerCase();
-                console.log("The user has type " + input);
+                let input = document.getElementById('search-input').value.toLowerCase();
+                console.log("The user has typed " + input);
+
+                let container = document.getElementById('locationList');
+                let partnerContainers = container.getElementsByClassName("partnerDiv");
+
+                for (let i = 0; i < partnerContainers.length; i++) {
+                    let nameElement = partnerContainers[i].getElementsByClassName("name")[0];
+                    let name = nameElement.textContent.toLowerCase();
+
+                    if (name.includes(input)) {
+                        partnerContainers[i].classList.add("flex");
+                        partnerContainers[i].classList.remove("hidden");
+                    } else {
+                        partnerContainers[i].classList.add("hidden");
+                        partnerContainers[i].classList.remove("flex");
+                    }
+                 }
             }
+
         </script>
     
     </body>
